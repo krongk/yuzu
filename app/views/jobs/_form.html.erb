@@ -1,0 +1,22 @@
+<%= simple_form_for(@job) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.input :cate_id %>
+    <%= f.input :title %>
+    <%= f.input :mobile_phone %>
+    <%= f.input :email %>
+    <%= f.input :salary %>
+    <%= f.input :content %>
+    <%= f.association :region %>
+    <%= f.association :city %>
+    <%= f.association :district %>
+    <%= f.input :detail_address %>
+    <%= f.input :is_processed %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

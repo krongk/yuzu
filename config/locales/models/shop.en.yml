@@ -1,0 +1,24 @@
+---
+en:
+  active_record:
+    models:
+      shop: Shop
+    attributes:
+      shop:
+        title: Title
+        user: User
+        region: Region
+        city: City
+        district: District
+        detail_address: Detail address
+        content: Content
+        contact_name: Contact name
+        contact_phone: Contact phone
+        website: Website
+        source: Source
+        source_url: Source url
+        is_processed: Is processed
+    errors:
+      shop: 
+  helpers:
+    shop: 

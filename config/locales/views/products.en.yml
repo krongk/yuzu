@@ -1,0 +1,20 @@
+---
+en:
+  products:
+    index:
+      title: Products
+    show:
+      title: Product
+    edit:
+      title: Editing Product
+    new:
+      title: New Product
+  flash:
+    products:
+      create:
+        notice: '%{resource_name} was successfully created.'
+      update:
+        notice: '%{resource_name} was successfully updated.'
+      destroy:
+        notice: '%{resource_name} was successfully deleted.'
+        alert: '%{resource_name} could not be deleted.'

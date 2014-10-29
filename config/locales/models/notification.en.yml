@@ -1,0 +1,13 @@
+---
+en:
+  active_record:
+    models:
+      notification: Notification
+    attributes:
+      notification:
+        message: Message
+        is_processed: Is processed
+    errors:
+      notification: 
+  helpers:
+    notification: 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>   <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>      <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>      <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <!-- Mobile Devices Viewport Resset-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <title><%= content_for?(:title) ? yield(:title) : "Zuyu" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Zuyu" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <h1 class="sr-only">足浴114</h1>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <div id="main" class="container">
+      <%= render 'layouts/banner' %>
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div><!--#main.container-->
+    <footer id="footer" class="footer-area">
+      <%= render 'layouts/footer' %>
+    </footer>
+  </body>
+</html>

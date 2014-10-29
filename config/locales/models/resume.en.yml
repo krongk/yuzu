@@ -1,0 +1,28 @@
+---
+en:
+  active_record:
+    models:
+      resume: Resume
+    attributes:
+      resume:
+        user: User
+        cate_id: Cate
+        name: Name
+        summary: Summary
+        sex: Sex
+        age: Age
+        education: Education
+        work_year: Work year
+        content: Content
+        phone: Phone
+        qq: Qq
+        region: Region
+        city: City
+        district: District
+        pv_count: Pv count
+        fav_count: Fav count
+        is_processed: Is processed
+    errors:
+      resume: 
+  helpers:
+    resume: 

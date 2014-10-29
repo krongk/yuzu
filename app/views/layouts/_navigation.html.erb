@@ -1,0 +1,130 @@
+<nav id="header" class="header-navbar" role="navigation">
+
+  <div class="header-navbar-inner container">
+  
+    <div id="brand" class="navbar-brand">
+      <a href="/" rel="bookmark">
+        <!-- to disable lazy loading, remove data-src and data-src-retina -->
+        <img src="/assets/logo.png" data-src="/assets/logo.png" data-src-retina="/assets/logo-retina.png" width="244" height="56" alt="">
+
+        <!--fallback for no javascript browsers-->
+        <noscript>
+          <img src="/assets/logo.png" alt="足浴114">
+        </noscript>
+      </a>
+    </div>
+
+    <ul class="nav nav-pages hidden-xs">
+      <li><%= link_to 'www.zuyu114.com', '/' %></li>
+      <li><%= link_to '关于我们', page_path('about') %></li>
+      <li><%= link_to '政策法规', page_path('privacy') %></li>
+    </ul>
+
+    <ul class="nav nav-icons">
+      <li>
+        <a href="#" class="btn-icon" data-toggle=".header-navbar-inner" data-toggle-class="search-toggled-in">
+          <span class="search-toggled-out-icon glyphicon glyphicon-search"></span>
+          <span class="search-toggled-in-icon glyphicon glyphicon-remove"></span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="search-wrapper js-stoppropagation">
+      <div class="search-wrapper-inner">
+        <form>
+          <input type="text" value="" placeholder="search ... ">
+          <button class="btn-icon" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        </form>
+      </div>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li class="nav-all pull-right full-subnav-wrapper">
+
+        <a href="#" data-toggle="li"> 
+          <span class="text">网站导航</span>
+          <span class="toggle glyphicon glyphicon-align-justify"></span>
+        </a>
+
+        <div class="row subnav-wrapper">
+          
+          <div class="col-md-2 col-sm-2 bg-bar">
+            <strong class="subnav-header">Pages</strong>
+            <ul class="subnav-full">
+              <li><a href="http://html.coolorize.com/summarize/html/index.html">Blog 3 Columns</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/blog.html">Blog 2 Columns</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/blog-grids.html">Blog Grids</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/reviews.html">Reviews Archive</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/single.html">Single Blog</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/single-full.html">Single Blog (Full)</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/components.html">Components</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-2">
+            <strong class="subnav-header">Colorschemes</strong>
+            <ul class="subnav-full">
+              <li><a href="html.html">Coolorize</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html-dark/">Dark</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html-light/">Light</a></li>
+              <li><a href="#">Amet Commodo</a></li>
+              <li><a href="#">Consectetur </a></li>
+              <li><a href="#">Adipisicing</a></li>
+              <li><a href="#">Duis aute </a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-2">
+            <strong class="subnav-header">Banner Placements</strong>
+            <ul class="subnav-full">
+              <li><a href="http://html.coolorize.com/summarize/html/banner-index.html">Home</a></li>
+              <li><a href="http://html.coolorize.com/summarize/html/banner-single.html">Single</a></li>
+              <li><a href="#">Ipsum  Nisi </a></li>
+              <li><a href="#">Dolor Aliquip</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-2">
+            <strong class="subnav-header">Category</strong>
+            <ul class="subnav-full">
+              <li><a href="#">Ipsum  Nisi </a></li>
+              <li><a href="#">Dolor Aliquip</a></li>
+              <li><a href="#">Amet Commodo</a></li>
+              <li><a href="#">Consectetur </a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-2">
+            <strong class="subnav-header">Category</strong>
+            <ul class="subnav-full">
+              <li><a href="#">Consectetur </a></li>
+              <li><a href="#">Adipisicing</a></li>
+              <li><a href="#">Ipsum  Nisi </a></li>
+              <li><a href="#">Dolor Aliquip</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-sm-2">
+            <strong class="subnav-header">Category</strong>
+            <ul class="subnav-full">
+              <li><a href="#">Ipsum  Nisi </a></li>
+              <li><a href="#">Dolor Aliquip</a></li>
+              <li><a href="#">Amet Commodo</a></li>
+              <li><a href="#">Consectetur </a></li>
+            </ul>
+          </div>
+
+        </div>
+      </li>
+      <li class="active"><a href="/dashboard/post">免费发布</a></li>
+      <li><a href="#">足疗技师</a></li>
+      <li><a href="#">足疗招聘</a></li>
+      <li><a href="#">招商加盟</a></li>
+      <li><a href="#">行业培训</a></li>
+      <li><a href="#">足疗用品</a></li>
+      <li><a href="#">经营宝典</a></li>
+      <%= render 'layouts/navigation_links' %>
+    </ul>
+
+  </div>
+</nav>

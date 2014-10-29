@@ -1,0 +1,51 @@
+<h1>Listing shops</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Region</th>
+      <th>City</th>
+      <th>District</th>
+      <th>Detail address</th>
+      <th>Content</th>
+      <th>Contact name</th>
+      <th>Contact phone</th>
+      <th>Website</th>
+      <th>Source</th>
+      <th>Source url</th>
+      <th>Is processed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shops.each do |shop| %>
+      <tr>
+        <td><%= shop.title %></td>
+        <td><%= shop.user %></td>
+        <td><%= shop.region %></td>
+        <td><%= shop.city %></td>
+        <td><%= shop.district %></td>
+        <td><%= shop.detail_address %></td>
+        <td><%= shop.content %></td>
+        <td><%= shop.contact_name %></td>
+        <td><%= shop.contact_phone %></td>
+        <td><%= shop.website %></td>
+        <td><%= shop.source %></td>
+        <td><%= shop.source_url %></td>
+        <td><%= shop.is_processed %></td>
+        <td><%= link_to 'Show', shop %></td>
+        <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
+        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop', new_shop_path %>

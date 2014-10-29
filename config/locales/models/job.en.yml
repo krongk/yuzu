@@ -1,0 +1,23 @@
+---
+en:
+  active_record:
+    models:
+      job: Job
+    attributes:
+      job:
+        user: User
+        cate_id: Cate
+        title: Title
+        mobile_phone: Mobile phone
+        email: Email
+        salary: Salary
+        content: Content
+        region: Region
+        city: City
+        district: District
+        detail_address: Detail address
+        is_processed: Is processed
+    errors:
+      job: 
+  helpers:
+    job: 

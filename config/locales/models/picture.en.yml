@@ -1,0 +1,15 @@
+---
+en:
+  active_record:
+    models:
+      picture: Picture
+    attributes:
+      picture:
+        user: User
+        title: Title
+        source_type: Source type
+        source_id: Source
+    errors:
+      picture: 
+  helpers:
+    picture: 

@@ -1,0 +1,59 @@
+<h1>Listing resumes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Cate</th>
+      <th>Name</th>
+      <th>Summary</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Education</th>
+      <th>Work year</th>
+      <th>Content</th>
+      <th>Phone</th>
+      <th>Qq</th>
+      <th>Region</th>
+      <th>City</th>
+      <th>District</th>
+      <th>Pv count</th>
+      <th>Fav count</th>
+      <th>Is processed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resumes.each do |resume| %>
+      <tr>
+        <td><%= resume.user %></td>
+        <td><%= resume.cate_id %></td>
+        <td><%= resume.name %></td>
+        <td><%= resume.summary %></td>
+        <td><%= resume.sex %></td>
+        <td><%= resume.age %></td>
+        <td><%= resume.education %></td>
+        <td><%= resume.work_year %></td>
+        <td><%= resume.content %></td>
+        <td><%= resume.phone %></td>
+        <td><%= resume.qq %></td>
+        <td><%= resume.region %></td>
+        <td><%= resume.city %></td>
+        <td><%= resume.district %></td>
+        <td><%= resume.pv_count %></td>
+        <td><%= resume.fav_count %></td>
+        <td><%= resume.is_processed %></td>
+        <td><%= link_to 'Show', resume %></td>
+        <td><%= link_to 'Edit', edit_resume_path(resume) %></td>
+        <td><%= link_to 'Destroy', resume, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Resume', new_resume_path %>

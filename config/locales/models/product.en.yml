@@ -1,0 +1,23 @@
+---
+en:
+  active_record:
+    models:
+      product: Product
+    attributes:
+      product:
+        user: User
+        cate_id: Cate
+        title: Title
+        mobile_phone: Mobile phone
+        email: Email
+        content: Content
+        price: Price
+        region: Region
+        city: City
+        district: District
+        detail_address: Detail address
+        is_processed: Is processed
+    errors:
+      product: 
+  helpers:
+    product: 

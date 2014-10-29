@@ -1,0 +1,27 @@
+<%= simple_form_for(@resume) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.input :cate_id %>
+    <%= f.input :name %>
+    <%= f.input :summary %>
+    <%= f.input :sex %>
+    <%= f.input :age %>
+    <%= f.input :education %>
+    <%= f.input :work_year %>
+    <%= f.input :content %>
+    <%= f.input :phone %>
+    <%= f.input :qq %>
+    <%= f.association :region %>
+    <%= f.association :city %>
+    <%= f.association :district %>
+    <%= f.input :pv_count %>
+    <%= f.input :fav_count %>
+    <%= f.input :is_processed %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

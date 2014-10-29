@@ -1,0 +1,96 @@
+
+## Rain-Store服务器管理
+
+1. 登录：115.29.195.174 root pwssword
+   修改密码：$>passwd roor-> Kenromxxx(大写)
+
+2. 阿里云服务器便捷工具安装(http://help.aliyun.com/manual?spm=0.0.0.0.qI06SV&lastSortId=440)：
+  分区，运行根目录文件： ./auto_fdisk.sh
+
+  手动磁盘分区：
+   mkfs.ext3 /dev/xvdb1
+   echo '/dev/xvdb1 /mnt ext3 defaults 0 0' >> /etc/fstab
+   cat /etc/fstab
+   mount -a
+
+   同步时间(下载：http://help.aliyun.com/manual?spm=0.0.0.0.Bpbzii&&helpId=1660)
+   $>sudo bash update_time.sh
+
+2. 软件安装：
+  安装git: $>apt-get install git-core
+
+  安装rvm,requirements,ruby,rails: 
+  $>curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled
+  $>source /usr/local/rvm/scripts/rvm
+  $>sudo bash ~/.profile
+
+  更新gem源：
+  $>sed -i 's!ftp.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' $rvm_path/config/db
+  $>cat  /usr/local/rvm/config/db
+
+  $>gem source
+  $>gem source --add http://ruby.taobao.org/
+  $>gem source --remove https://rubygems.org/
+  $>gem source
+
+  安装MySQL:
+  $>sudo apt-get install mysql-server mysql-client
+  输入密码；kenrome001
+  $>sudo apt-get install libmysql-ruby libmysqlclient-dev
+
+  安装Passenger+nginx
+  $> gem install passenger
+  $> passenger-install-nginx-module
+  !!!!记住这里前面没有加‘sudo'，因为rvm是安装在no-sudo用户下的，如果在这里加sudo的话，会将passenger 安装到系统自带的ruby1.8下
+
+  >以下是官方安装方法：不适用于Ruby+Passenger的集成
+    安装Passenger+Nginx(http://www.modrails.com/documentation/Users%20guide%20Nginx.html#install_on_debian_ubuntu)
+    $>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 561F9B9CAC40B2F7
+    $>vi /etc/apt/sources.list.d/passenger.list
+      insert line: deb https://oss-binaries.phusionpassenger.com/apt/passenger precise main
+    $>sudo chown root: /etc/apt/sources.list.d/passenger.list
+    $>sudo chmod 600 /etc/apt/sources.list.d/passenger.list
+    $>sudo apt-get update
+
+  添加用户组：
+  $>adduser --system --no-create-home --disabled-login --disabled-password --group  www
+
+  安装PHP
+    $> sudo apt-get install php5-common php5-fpm php-apc php5-mysql php5-gd
+
+
+  整理文件夹：
+  $>cd alidata1/
+  $>mkdir backup
+  $>mkdir www
+  $>mkdir server
+
+  $>ln -s /opt/nginx/ /alidata/server/ 或者
+  $>ln -s /etc/nginx/ /alidata1/server/
+  $>ln -s /var/log/ /alidata1/
+
+  查找：
+  $> find / -name 'nginx'
+
+  安装imagemagick
+
+  $> apt-get install imagemagick libmagickcore-dev
+  $> apt-get install libmagickwand-dev
+  $> gem install rmagick
+
+  ######################################
+  ## 部署到production
+
+  因为是通过模版安装，图片文件不能完成数字化，选择Rails4的no-digest方式：
+  1. 修改/config/environments/production.rb
+  config.serve_static_assets = true #default is false
+  config.assets.compile = false
+  config.assets.digest = false #default is true
+
+  2. ckeditor仍然无法运行，则运行：/lib/tasks/ckeditor.rake
+    讲数字化的文件名改为非数字化的。
+
+  解决 Nginx"Permission denied"的问题：
+  sudo chmod 777 -R /alidata/www/rxy123/public/templetes/rxy123/
+
+  3. 修改admin/templetes_controller.rb中update_cache方法reload nginx的路径

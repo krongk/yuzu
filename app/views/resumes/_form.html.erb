@@ -2,26 +2,35 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.input :cate_id %>
-    <%= f.input :name %>
-    <%= f.input :summary %>
-    <%= f.input :sex %>
-    <%= f.input :age %>
-    <%= f.input :education %>
-    <%= f.input :work_year %>
-    <%= f.input :content %>
-    <%= f.input :phone %>
+    <%= f.input :name, required: true %>
+    <%= f.input :phone, required: true, 
+        :input_html => {:maxlength => 11, size: 40}, 
+        hint: '请保证您的手机能够正确的接收到验证码' %>
+    <%= f.input :email %>
     <%= f.input :qq %>
+    <hr/>
+    <%= f.input :cate_id, collection: ApplicationHelper::JOB_CATES, include_blank: false  %>
+    
+    <%= f.input :summary, :input_html => {:rows => 4},
+        placeholder: '简单说明一下你的优势和特长，可提高15%的查看率。' %>
+    <%= f.collection_radio_buttons :sex, [[true, '男'] ,[false, '女']], :first, :last,
+        collection_wrapper_tag: 'div',
+        collection_wrapper_class: 'control-group',
+        item_wrapper_tag: 'span', 
+        item_wrapper_class: '' %>
+    <%= f.input :age %>
+    <%#= f.input :age, as: :date, start_year: Date.today.year - 50,
+                    end_year: Date.today.year, order: [:year, :month, :day] %>
+    <%= f.input :education, collection: ['高中以下', '高中', '中专/技校', '专科', '本科', '硕士', 'MBA/EMBA'], prompt: "选择最高学历" %>
+    <%= f.input :work_year, collection: ['1年以下', '1-2年', '3-5年', '5-8年', '8年以上'], prompt: "选择工作年限" %>
+    <%= f.input :content, :input_html => {:rows => 12} %>
+    <hr/>
     <%= f.association :region %>
     <%= f.association :city %>
     <%= f.association :district %>
-    <%= f.input :pv_count %>
-    <%= f.input :fav_count %>
-    <%= f.input :is_processed %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <hr/>
+  <div class="form-actions col-sm-offset-1">
+    <%= f.button :submit, class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>

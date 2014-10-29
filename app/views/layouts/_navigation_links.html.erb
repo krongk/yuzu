@@ -1,1 +1,9 @@
 <%# add navigation links to this file %>
+<% if user_signed_in? %>
+  <li class="active"><%= link_to '进入后台', user_root_path %></li>
+  <li><%= link_to '修改密码', edit_user_registration_path %></li>
+  <li><%= link_to '退出', destroy_user_session_path, :method=>'delete' %></li>
+<% else %>
+  <li><%= link_to '登录', new_user_session_path %></li>
+  <li><%= link_to '注册', new_user_registration_path %></li>
+<% end %>

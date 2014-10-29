@@ -1,0 +1,24 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      shop: 企业信息
+    attributes:
+      shop:
+        title: 企业名称
+        mobile_phone: 手机号码 
+        description: 企业简介
+        picture: 照片
+        contact_name: 联系人
+        email: 电子邮箱
+        qq: QQ
+        weichat: 微信号 
+        website: 公司网站
+        region_id: 省
+        city_id: 市
+        district_id: 区 
+        is_authenticate: 是否认证
+        license_number: 认证号码
+        license_picture: 认证照片
+        fav_count: 关注数
+        is_processed: 处理状态

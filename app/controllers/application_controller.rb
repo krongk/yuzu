@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  
   #add page cache
   include ActionController::Caching::Pages
   self.page_cache_directory = "#{Rails.root.to_s}/public/page_cache"

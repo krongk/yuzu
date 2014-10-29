@@ -1,0 +1,18 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      product: 企业信息
+    attributes:
+      product:
+        is_processed: 处理状态
+        cate_id: 分类
+        title: 标题
+        mobile_phone: 手机号码
+        email: 电子邮箱
+        content: 详细内容
+        price: 价格
+        region: 省
+        city: 市
+        district: 区
+        detail_address: 详细地址

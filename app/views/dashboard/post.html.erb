@@ -1,0 +1,44 @@
+<div class="section content bg-base">
+  
+  <h2 class="section-title ribbon"><span>What's you should know</span></h2>
+
+  <div class="entries">
+
+    <div class="row">
+
+      <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1" style="border-left: 1px solid #d9d9d9;">
+        <div class="entry-meta">
+          <span class="category"><%= link_to '发布求职简历', new_resume_path %></span>
+        </div>
+        <h3 class="entry-title">
+          <a href="single.html" rel="bookmark">Postman will send alerts to your phone about popular people and their shouts.</a>
+        </h3>
+      </article>
+
+      <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
+        <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
+          <div class="entry-meta">
+            <span class="category"><%= link_to "发布#{cate}", new_product_path(cate_id: index) %></span>
+          </div>
+          <h3 class="entry-title">
+            <a href="single.html" rel="bookmark">Postman will send alerts to your phone about popular people and their shouts.</a>
+          </h3>
+        </article>
+      <% end  %>
+
+      <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
+        <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
+          <div class="entry-meta">
+            <span class="category"><%= link_to "招聘#{cate}", new_job_path(cate_id: cate) %></span>
+          </div>
+          <h3 class="entry-title">
+            <a href="single.html" rel="bookmark">Postman will send alerts to your phone about popular people and their shouts.</a>
+          </h3>
+        </article>
+      <% end  %>
+
+    </div><!--row.-->
+
+  </div><!--entries.-->
+
+</div>

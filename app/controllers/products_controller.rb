@@ -24,12 +24,20 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
+    @user = current_user 
+    @user ||= User.get(product_params[:mobile_phone], product_params[:email])
+    not_found if @user.nil?
 
+    @product = Product.new(product_params)
+    @product.user_id = @user.id
+    
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @product }
+        if user_signed_in?
+          format.html{ redirect_to user_root_path, notice: '信息发布成功.'}
+        else
+          format.html{ redirect_to new_user_session_path(id: @user.id), notice: '信息发布成功.' }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @product.errors, status: :unprocessable_entity }

@@ -1,2 +1,23 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div class="row">
+  <div class="col-md-3">
+    <p><img src="/assets/user.jpg" width="120px"/></p>
+    <p><%= current_user.mobile_phone || current_user.email %></p>
+    <p>
+      <%= link_to '修改密码', edit_user_registration_path, class: 'btn btn-default' %> &nbsp;
+      <%= link_to '退出', destroy_user_session_path, :method=>'delete', class: 'btn btn-default' %>
+    </p>
+    <ul class="nav nav-pills nav-stacked" role="tablist">
+      <li role="presentation" class="active"><a href="#">后台管理</a></li>
+      <li role="presentation"><%= link_to '发布求职简历', new_resume_path %></li>
+      <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
+        <li role="presentation"><%= link_to "发布#{cate}", new_product_path(cate_id: index) %></li>
+      <% end  %>
+      <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
+        <li role="presentation"><%= link_to "招聘#{cate}", new_job_path(cate_id: index) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-9" role="main">
+    <%= render partial: 'dashboard/list' %>
+  </div>
+</div>

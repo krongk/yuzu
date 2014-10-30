@@ -7,7 +7,7 @@ module ApplicationHelper
 
   #一旦确定，千万别改变顺序
   JOB_CATES = ['足疗师', '按摩师', '保健师', '搓澡工', '针灸推拿', '其他']
-  PRODUCT_CATES = ['服务信息', '产品信息', '培训信息', '转让求购', '招商加盟']
+  PRODUCT_CATES = ['服务信息', '产品信息', '转让求购', '培训信息', '招商加盟']
 
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)

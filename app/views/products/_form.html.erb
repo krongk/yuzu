@@ -2,21 +2,24 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.input :cate_id %>
-    <%= f.input :title %>
-    <%= f.input :mobile_phone %>
+   
+    <%= f.input :mobile_phone, required: true, 
+        hint: '请保证您的手机能够正确的接收到验证码'  %>
     <%= f.input :email %>
-    <%= f.input :content %>
-    <%= f.input :price %>
+    <hr/>
+    <%= f.input :cate_id, collection: ApplicationHelper::PRODUCT_CATES.collect{|s| [s,ApplicationHelper::PRODUCT_CATES.index(s)]}, selected: params[:cate_id],include_blank: false %>
+    <%= f.input :title, required: true %>
+    <%= f.input :content, :input_html => {:rows => 12}  %>
+    <% if [0,1,2].include?(params[:cate_id].to_i) %>
+      <%= f.input :price %>
+    <% end %>
     <%= f.association :region %>
     <%= f.association :city %>
     <%= f.association :district %>
     <%= f.input :detail_address %>
-    <%= f.input :is_processed %>
   </div>
-
+  <hr/>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>

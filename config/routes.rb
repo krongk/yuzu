@@ -7,7 +7,11 @@ RainCms::Application.routes.draw do
   resources :pictures
   resources :products
   resources :jobs
-  resources :resumes
+  resources :resumes do
+    member do
+      get 'preview'
+    end
+  end
   resources :shops
 
 

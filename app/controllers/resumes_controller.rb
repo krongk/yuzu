@@ -1,5 +1,5 @@
 class ResumesController < ApplicationController
-  before_action :set_resume, only: [:show, :edit, :update, :destroy]
+  before_action :set_resume, only: [:show, :edit, :update, :destroy, :preview]
 
   # GET /resumes
   # GET /resumes.json
@@ -24,17 +24,27 @@ class ResumesController < ApplicationController
   # POST /resumes
   # POST /resumes.json
   def create
-    @resume = Resume.new(resume_params)
+    @user = current_user 
+    @user ||= User.get(resume_params[:mobile_phone], resume_params[:email])
+    not_found if @user.nil?
 
-    respond_to do |format|
-      if @resume.save
-        format.html { redirect_to @resume, notice: 'Resume was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @resume }
+    @resume = Resume.new(resume_params)
+    @resume.user_id = @user.id
+
+    if @resume.save
+        if user_signed_in?
+          redirect_to user_root_path, notice: '信息发布成功.'
+        else
+          redirect_to new_user_session_path(id: @user.id), notice: '信息发布成功.'
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @resume.errors, status: :unprocessable_entity }
       end
-    end
+  end
+
+  def preview
+
   end
 
   # PATCH/PUT /resumes/1
@@ -69,6 +79,6 @@ class ResumesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resume_params
-      params.require(:resume).permit(:email, :cate_id, :name, :summary, :sex, :age, :education, :work_year, :content, :phone, :qq, :region_id, :city_id, :district_id, :pv_count, :fav_count, :is_processed)
+      params.require(:resume).permit(:email, :cate_id, :name, :summary, :sex, :age, :education, :work_year, :content, :mobile_phone, :qq, :region_id, :city_id, :district_id, :pv_count, :fav_count, :is_processed)
     end
 end

@@ -29,14 +29,13 @@
       <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
         <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
           <div class="entry-meta">
-            <span class="category"><%= link_to "招聘#{cate}", new_job_path(cate_id: cate) %></span>
+            <span class="category"><%= link_to "招聘#{cate}", new_job_path(cate_id: index) %></span>
           </div>
           <h3 class="entry-title">
             <a href="single.html" rel="bookmark">Postman will send alerts to your phone about popular people and their shouts.</a>
           </h3>
         </article>
       <% end  %>
-
     </div><!--row.-->
 
   </div><!--entries.-->

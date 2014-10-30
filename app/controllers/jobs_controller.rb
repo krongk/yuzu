@@ -24,12 +24,20 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
+    @user = current_user 
+    @user ||= User.get(job_params[:mobile_phone], job_params[:email])
+    not_found if @user.nil?
+
     @job = Job.new(job_params)
+    @job.user_id = @user.id
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @job }
+        if user_signed_in?
+          format.html{ redirect_to user_root_path, notice: '信息发布成功.'}
+        else
+          format.html{ redirect_to new_user_session_path(id: @user.id), notice: '信息发布成功.' }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @job.errors, status: :unprocessable_entity }

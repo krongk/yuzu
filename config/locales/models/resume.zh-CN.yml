@@ -7,6 +7,7 @@ zh-CN:
       resume:
         user: 用户
         cate: 应聘职位
+        cate_id: 应聘职位
         name: 姓名
         summary: 自我介绍
         sex: 性别
@@ -14,7 +15,7 @@ zh-CN:
         education: 学历
         work_year: 工作年限
         content: 简历内容
-        phone: 手机号码
+        mobile_phone: 手机号码
         qq: QQ
         email: 电子邮箱
         picture: 照片

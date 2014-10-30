@@ -1,11 +1,18 @@
 <h2>注册账户</h2>
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
-  <%= f.error_notification %>
-  <%= display_base_errors resource %>
-  <%= f.input :name, :autofocus => true %>
-  <%= f.input :email, :required => true %>
-  <%= f.input :password, :required => true %>
-  <%= f.input :password_confirmation, :required => true %>
-  <%= f.button :submit, 'Sign up', :class => 'btn-primary' %>
-<% end %>
-<%= render "devise/shared/links" %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+  </div>
+  <div class="panel-body">
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+      <%= f.error_notification %>
+      <%= display_base_errors resource %>
+      <%= f.input :mobile_phone, :required => true, :autofocus => true %>
+      <%= f.input :email, :required => true %>
+      <%= f.input :password, :required => true, hint: false %>
+      <%= f.input :password_confirmation, :required => true %>
+      <hr/>
+      <%= f.button :submit, '注册', :class => 'btn-primary' %>
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

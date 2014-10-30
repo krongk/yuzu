@@ -7,8 +7,10 @@ module ApplicationHelper
 
   #一旦确定，千万别改变顺序
   JOB_CATES = ['足疗师', '按摩师', '保健师', '搓澡工', '针灸推拿', '其他']
-  PRODUCT_CATES = ['服务信息', '产品信息', '转让求购', '培训信息', '招商加盟']
+  JOB_ICONS = ['star', 'star-half-o', 'star-o', 'star-o', 'star-half', 'user']
 
+  PRODUCT_CATES = ['服务信息', '产品信息', '转让求购', '培训信息', '招商加盟']
+  PRODUCT_ICONS = ['smile-o', 'tag', 'suitcase', 'leaf', 'plus-square']
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join
@@ -47,9 +49,9 @@ module ApplicationHelper
   #use for Admin: preview id, production use short_title to cache.
   def get_preview_url(obj)
     if obj.class == Admin::Page
-      "/#{obj.channel.id}/#{obj.id}"
+      "/post/#{obj.id}"
     elsif obj.class == Admin::Channel
-      "/#{obj.id}"
+      "/channel/#{obj.id}"
     else
       "/"
     end
@@ -57,9 +59,9 @@ module ApplicationHelper
   #use for Frontpage: get production frontpage path
   def get_url(obj)
     if obj.class == Admin::Page
-      "/#{obj.channel.short_title}/#{obj.id}"
+      "/post/#{obj.id}"
     elsif obj.class == Admin::Channel
-      "/#{obj.short_title}"
+      "/channel/#{obj.short_title}"
     else
       "/"
     end

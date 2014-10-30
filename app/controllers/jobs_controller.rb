@@ -1,10 +1,19 @@
 class JobsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = if params[:cate_id]
+      Job.where(cate_id: params[:cate_id]).page(params[:page])
+    else
+      Job.page(params[:page])
+    end
+    @jobs = current_user.jobs.page(params[:page]) if user_signed_in? && params[:user_id]
+
+    @cate_name = ApplicationHelper::JOB_CATES[params[:cate_id].to_i]
+    @cate_name ||= '招聘信息'
   end
 
   # GET /jobs/1

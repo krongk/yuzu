@@ -1,10 +1,12 @@
 class ResumesController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_resume, only: [:show, :edit, :update, :destroy, :preview]
 
   # GET /resumes
   # GET /resumes.json
   def index
-    @resumes = Resume.all
+    @resumes = Resume.page(params[:page])
+    @resumes = current_user.resumes.page(params[:page]) if user_signed_in? && params[:user_id]
   end
 
   # GET /resumes/1

@@ -1,23 +1,27 @@
 <div class="row">
-  <div class="col-md-3">
-    <p><img src="/assets/user.jpg" width="120px"/></p>
-    <p><%= current_user.mobile_phone || current_user.email %></p>
-    <p>
-      <%= link_to '修改密码', edit_user_registration_path, class: 'btn btn-default' %> &nbsp;
-      <%= link_to '退出', destroy_user_session_path, :method=>'delete', class: 'btn btn-default' %>
-    </p>
+  <div class="col-md-3 col-sm-6">
+
+    <div class="thumbnail">
+      <div class="text-center"><i class="fa fa-user fa-5x"></i></div>
+      <div class="caption text-center">
+        <h3><%= current_user.mobile_phone || current_user.email %></h3>
+        <p>
+          <%= link_to '修改密码', edit_user_registration_path, class: 'btn btn-default' %> &nbsp;
+          <%= link_to '退出', destroy_user_session_path, :method=>'delete', class: 'btn btn-default' %>
+        </p>
+      </div>
+    </div>
+
     <ul class="nav nav-pills nav-stacked" role="tablist">
       <li role="presentation" class="active"><a href="#">后台管理</a></li>
-      <li role="presentation"><%= link_to '发布求职简历', new_resume_path %></li>
+      <li role="presentation"><%= link_to '我的求职简历', resumes_path(user_id: current_user.id) %></li>
       <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
-        <li role="presentation"><%= link_to "发布#{cate}", new_product_path(cate_id: index) %></li>
+        <li role="presentation"><%= link_to "我的#{cate}", cate_products_path(cate_id: index, user_id: current_user.id) %></li>
       <% end  %>
-      <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
-        <li role="presentation"><%= link_to "招聘#{cate}", new_job_path(cate_id: index) %></li>
-      <% end %>
+      <li role="presentation"><%= link_to "我的招聘信息", jobs_path(user_id: current_user.id) %></li>
     </ul>
   </div>
   <div class="col-md-9" role="main">
-    <%= render partial: 'dashboard/list' %>
+    <%= render 'create_list' %>
   </div>
 </div>

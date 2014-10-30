@@ -1,10 +1,11 @@
 class ShopsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.all
+    @shops = Shop.page(params[:page])
   end
 
   # GET /shops/1

@@ -1,15 +1,26 @@
-<% title \
-  [ params[:search], 
-    Admin::Keystore.value_for('site_name')].join(' | ').sub(/^\s*\|/, '').strip %>
-<% meta_keywords \
-  [ params[:search], 
-    Admin::Keystore.value_for('site_name')].join(' | ').sub(/^\s*\|/, '').strip %>
-<% meta_description \
-  [ params[:search], 
-    Admin::Keystore.value_for('site_name')].join(' | ').sub(/^\s*\|/, '').strip %>
 
-<% if File.exist?( @base_dir + 'temp_search.html' )%>
-  <%= render file: @base_dir + 'temp_search.html' %>
-<% else %>
-  <h2 class="error">没有找到搜索模版文件！</h2>
-<% end %>
+<h3>公共文章</h3>
+<p>一共找到<%= @posts.count %>条记录...</p>
+<ul>
+  <% @posts.each do |post| %>
+    <li><%=link_to post.title, post_path(post) %></li>
+  <% end %>
+</ul>
+<hr/>
+
+<h3>企业发布信息</h3>
+<p>一共找到<%= @products.count %>条记录...</p>
+<ul>
+  <% @products.each do |product| %>
+    <li><%=link_to product.title, product_path(product) %></li>
+  <% end %>
+</ul>
+<hr/>
+
+<h3>招聘信息</h3>
+<p>一共找到<%= @jobs.count %>条记录...</p>
+<ul>
+  <% @jobs.each do |job| %>
+    <li><%=link_to job.title, job_path(job) %></li>
+  <% end %>
+</ul>

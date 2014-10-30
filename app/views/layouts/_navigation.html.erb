@@ -16,8 +16,7 @@
 
     <ul class="nav nav-pages hidden-xs">
       <li><%= link_to 'www.zuyu114.com', '/' %></li>
-      <li><%= link_to '关于我们', page_path('about') %></li>
-      <li><%= link_to '政策法规', page_path('privacy') %></li>
+      <%= render 'layouts/navigation_links' %>
     </ul>
 
     <ul class="nav nav-icons">
@@ -31,10 +30,10 @@
 
     <div class="search-wrapper js-stoppropagation">
       <div class="search-wrapper-inner">
-        <form>
-          <input type="text" value="" placeholder="search ... ">
+        <%= form_tag search_path, :method => 'get' do %>
+          <input type="text" name="search" value="" placeholder="输入搜素关键词 ... ">
           <button class="btn-icon" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-        </form>
+        <% end %>
       </div>
     </div>
 
@@ -42,88 +41,87 @@
       <li class="nav-all pull-right full-subnav-wrapper">
 
         <a href="#" data-toggle="li"> 
-          <span class="text">网站导航</span>
+          <span class="text hidden-sm hidden-xs">网站导航</span>
           <span class="toggle glyphicon glyphicon-align-justify"></span>
         </a>
 
         <div class="row subnav-wrapper">
           
           <div class="col-md-2 col-sm-2 bg-bar">
-            <strong class="subnav-header">Pages</strong>
+            <strong class="subnav-header">企业信息</strong>
             <ul class="subnav-full">
-              <li><a href="http://html.coolorize.com/summarize/html/index.html">Blog 3 Columns</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/blog.html">Blog 2 Columns</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/blog-grids.html">Blog Grids</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/reviews.html">Reviews Archive</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/single.html">Single Blog</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/single-full.html">Single Blog (Full)</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/components.html">Components</a></li>
+              <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
+                <li><%= link_to cate, cate_products_path(cate_id: index)%></li>
+              <% end %>
             </ul>
           </div>
 
           <div class="col-md-2 col-sm-2">
-            <strong class="subnav-header">Colorschemes</strong>
+            <strong class="subnav-header">招聘信息</strong>
             <ul class="subnav-full">
-              <li><a href="html.html">Coolorize</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html-dark/">Dark</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html-light/">Light</a></li>
-              <li><a href="#">Amet Commodo</a></li>
-              <li><a href="#">Consectetur </a></li>
-              <li><a href="#">Adipisicing</a></li>
-              <li><a href="#">Duis aute </a></li>
+              <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
+                <li><%= link_to cate, cate_jobs_path(cate_id: index)%></li>
+              <% end %>
             </ul>
           </div>
 
           <div class="col-md-2 col-sm-2">
-            <strong class="subnav-header">Banner Placements</strong>
+            <strong class="subnav-header">足浴行业</strong>
             <ul class="subnav-full">
-              <li><a href="http://html.coolorize.com/summarize/html/banner-index.html">Home</a></li>
-              <li><a href="http://html.coolorize.com/summarize/html/banner-single.html">Single</a></li>
-              <li><a href="#">Ipsum  Nisi </a></li>
-              <li><a href="#">Dolor Aliquip</a></li>
+              <%= get_menu('baike') %>
+              <%= get_menu('shop') %>
+              <%= get_menu('dianpu') %>
+              <%= get_menu('news') %>
             </ul>
           </div>
 
           <div class="col-md-2 col-sm-2">
-            <strong class="subnav-header">Category</strong>
+            <strong class="subnav-header">个人服务</strong>
             <ul class="subnav-full">
-              <li><a href="#">Ipsum  Nisi </a></li>
-              <li><a href="#">Dolor Aliquip</a></li>
-              <li><a href="#">Amet Commodo</a></li>
-              <li><a href="#">Consectetur </a></li>
+              <li><%= link_to '求职简历', resumes_path %></li>
+              <li><%= link_to '我要求职', new_resume_path %></li>
+              <li><%= link_to '个人增值服务', page_path('for_user') %></li>
+              <li><%= link_to '个人用户登录', new_user_session_path %></li>
             </ul>
           </div>
 
           <div class="col-md-2 col-sm-2">
-            <strong class="subnav-header">Category</strong>
+            <strong class="subnav-header">商家合作</strong>
             <ul class="subnav-full">
-              <li><a href="#">Consectetur </a></li>
-              <li><a href="#">Adipisicing</a></li>
-              <li><a href="#">Ipsum  Nisi </a></li>
-              <li><a href="#">Dolor Aliquip</a></li>
+              <li><%= link_to '关于我们', page_path('about') %></li>
+              <li><%= link_to '足浴厂商', page_path('for_biz') %></li>
+              <li><%= link_to '店铺会所', page_path('for_shop') %></li>
+              <li><%= link_to '合作协议', page_path('co') %></li>
             </ul>
           </div>
 
           <div class="col-md-2 col-sm-2">
-            <strong class="subnav-header">Category</strong>
+            <strong class="subnav-header">关注我们</strong>
             <ul class="subnav-full">
-              <li><a href="#">Ipsum  Nisi </a></li>
-              <li><a href="#">Dolor Aliquip</a></li>
-              <li><a href="#">Amet Commodo</a></li>
-              <li><a href="#">Consectetur </a></li>
+              <li><a href="#"><img src="/assets/zuyu114_qr.png" width="100px" class="img-responsive" alt="足浴114二维码" /></a></li>
+              <li><a href="#">关注微信公共号</a></li>
             </ul>
           </div>
 
         </div>
       </li>
       <li class="active"><a href="/dashboard/post">免费发布</a></li>
-      <li><a href="#">足疗技师</a></li>
-      <li><a href="#">足疗招聘</a></li>
-      <li><a href="#">招商加盟</a></li>
-      <li><a href="#">行业培训</a></li>
-      <li><a href="#">足疗用品</a></li>
-      <li><a href="#">经营宝典</a></li>
-      <%= render 'layouts/navigation_links' %>
+      <li><%= link_to '求职信息', resumes_path %></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">足浴招聘<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
+        <li><%= link_to cate, cate_jobs_path(cate_id: index)%></li>
+      <% end %>
+        </ul>
+      </li>
+      <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
+        <li><%= link_to cate, cate_products_path(cate_id: index)%></li>
+      <% end %>
+      <%= get_menu('baike') %>
+      <%= get_menu('shop') %>
+      <%= get_menu('dianpu') %>
+      <%= get_menu('news') %>
     </ul>
 
   </div>

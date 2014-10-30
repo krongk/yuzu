@@ -1,56 +1,48 @@
-
 <div class="footer-top container">
-  <div class="row">
+  <div class="row hidden-xs hidden-sm">
     <div class="widget col-xs-12 col-sm-4">
-      <h4 class="widget-title">Categories</h4>
+      <h4 class="widget-title">产品分类</h4>
       <ul class="entries links links-2-cols">
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html">Entertainment</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html">Event</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html">Technology</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html">Social Media</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html">Tactical</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/reviews.html">Notebook</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/reviews.html">Smartphone</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/reviews.html">Tablet</a></li>
+        <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
+          <li><%= link_to cate, new_product_path(cate_id: index)%></li>
+        <% end %>
+        <li><%=link_to '发布简历', new_resume_path %></li>
       </ul>
     </div><!--/.col-3-->
     <div class="clearfix visible-xs"></div>
     <div class="widget col-xs-6 col-sm-2">
-      <h4 class="widget-title">Information</h4>
+      <h4 class="widget-title">企业招聘</h4>
       <ul class="entries links links">
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Advertise </a></li>
-        <li><a href="#">Terms &amp; Conditions</a></li>
-        <li><a href="#">Privacy</a></li>
+        <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
+          <li><%= link_to cate, new_job_path(cate_id: index)%></li>
+        <% end %>
       </ul>
     </div><!--/.col-3-->
     <div class="widget col-xs-6 col-sm-2">
-      <h4 class="widget-title">Follow Us</h4>
+      <h4 class="widget-title">商务合作</h4>
       <ul class="entries links">
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html"><i class="icon-facebook-sign icon-2x"></i> Facebook</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html"><i class="icon-twitter-sign icon-2x"></i> Twitter</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html"><i class="icon-google-plus-sign icon-2x"></i> Google Plus</a></li>
-        <li><a href="http://html.coolorize.com/summarize/html/blog.html"><i class="icon-linkedin-sign icon-2x"></i> Linkedin</a></li>
+        <li><%= link_to '关于我们', page_path('about') %></li>
+        <li><%= link_to '加入我们', page_path('join') %></li>
+        <li><%= link_to '足浴厂商', page_path('for_biz') %></li>
+        <li><%= link_to '店铺会所', page_path('for_shop') %></li>
+        <li><%= link_to '合作协议', page_path('co') %></li>
       </ul>
     </div><!--/.col-3-->
     <div class="clearfix visible-xs"></div>
     <div class="widget col-xs-12 col-sm-4">
-      <h4 class="widget-title">Subscribe</h4>
+      <h4 class="widget-title">关注足浴114</h4>
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label for="subscribeEmail" class="col-lg-2 control-label">EMAIL</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" id="subscribeEmail" placeholder="Your Email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">RSS</label>
-          <div class="col-lg-10">
-            <p class="form-control-static">
-              <a href=""><i class="icon-rss-sign"></i> Posts</a> &nbsp; &nbsp;
-              <a href=""><i class="icon-rss-sign"></i> Comments</a>
-            </p>
+            <div class="row">
+              <div class="col-md-6 text-center">
+                <img src="/assets/zuyu114_qr.png" width="100px" class="img-responsive" alt="足浴114二维码" />
+                <div>手机网站</div>
+              </div>
+              <div class="col-md-6 text-center">
+                <img src="/assets/zuyu114_qr.png" width="100px" class="img-responsive" alt="足浴114二维码" />
+                <div>微信公共号</div>
+              </div>
           </div>
         </div>
       </form>
@@ -59,7 +51,11 @@
 </div>
 <div class="footer-bottom">
   <div class="container aligncenter">
-    <p>&copy;2014 蜀备110105000809号 &nbsp;&nbsp;&nbsp;&nbsp; 违法信息举报：022-6062 5989/5991
-    <a href="http://www.szfw.org/" target="_blank"><img src="/assets/chengxin.png" /></a> <p>
+    <p>
+    <%= link_to '联系我们', page_path('contact') %>&nbsp; &nbsp;
+    <%= link_to '隐私保护', page_path('protect') %>&nbsp; &nbsp;
+    <%= link_to '免责声明', page_path('privacy') %>&nbsp; &nbsp;
+    &copy;2014 蜀备110105000809号 &nbsp;&nbsp;&nbsp;&nbsp; 违法信息举报：022-6062 5989/5991
+    <a href="http://www.szfw.org/" target="_blank"><img src="/assets/chengxin.png" alt="诚信网站" /></a> <p>
   </div>
 </div>

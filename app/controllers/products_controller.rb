@@ -1,10 +1,19 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = if params[:cate_id]
+      Product.where(cate_id: params[:cate_id]).page(params[:page])
+    else
+      Product.page(params[:page])
+    end
+    @products = current_user.products.page(params[:page]) if user_signed_in? && params[:user_id]
+
+    @cate_name = ApplicationHelper::PRODUCT_CATES[params[:cate_id].to_i]
+    @cate_name ||= '企业发布'
   end
 
   # GET /products/1

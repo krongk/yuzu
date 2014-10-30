@@ -1,0 +1,45 @@
+<div class="section content bg-base">
+  
+  <h2 class="section-title ribbon"><span>免费发布(免注册 --- 轻松发布，快速传播，即刻见效！)</span></h2>
+
+  <div class="entries">
+
+    <div class="row">
+
+      <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1" style="border-left: 1px solid #d9d9d9;">
+        <div class="text-center">
+          <br/><br/>
+          <%=link_to new_resume_path do %>
+            <i class="fa fa-book fa-5x"></i>
+            <h3>发布求职简历</h3>
+          <% end %>
+        </div>
+      </article>
+
+      <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
+        <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
+          <div class="text-center">
+            <br/><br/>
+            <%=link_to new_product_path(cate_id: index) do %>
+              <i class="fa fa-<%= ApplicationHelper::PRODUCT_ICONS[index]  %> fa-5x"></i>
+              <h3><%= "发布#{cate}" %></h3>
+            <% end %>
+          </div>
+        </article>
+      <% end  %>
+
+      <% ApplicationHelper::JOB_CATES.each_with_index do |cate, index| %>
+        <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
+          <div class="text-center">
+            <br/><br/>
+            <%=link_to new_job_path(cate_id: index) do %>
+              <i class="fa fa-<%= ApplicationHelper::JOB_ICONS[index] %> fa-5x"></i>
+              <h3><%= "招聘#{cate}" %></h3>
+            <% end %>
+          </div>
+        </article>
+      <% end  %>
+    </div><!--row.-->
+
+  </div><!--entries.-->
+</div>

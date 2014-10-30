@@ -1,10 +1,11 @@
 class PicturesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all
+    @pictures = Picture.page(params[:page])
   end
 
   # GET /pictures/1

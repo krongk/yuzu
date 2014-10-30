@@ -45,6 +45,11 @@ RainCms::Application.routes.draw do
   #match search/tag special path
   match '/search(/page/:page)', to: "welcome#search", via: :get, as: 'search'
   match '/tag/:tag(/page/:page)', to: "welcome#tag", as: 'tag', via: :get
-  
+  #shop
+  match '/(cate/:cate_id/)products(/page/:page)', to: "products#index", via: :get, as: 'cate_products'
+  match '/(cate/:cate_id/)jobs(/page/:page)', to: "jobs#index", via: :get, as: 'cate_jobs'
+  #channel
+  match '/channel/:id', to: "channel#index", via: :get, as: 'channel'
+  match '/post/:id', to: "channel#show", via: :get, as: 'post'
   
 end

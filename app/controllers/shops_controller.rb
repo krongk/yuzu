@@ -25,11 +25,17 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
+    puts "-------------------------#{shop_params[:typo]}"
+    @user = current_user 
+    @user ||= User.get(shop_params[:mobile_phone], shop_params[:email], shop_params[:typo])
+    not_found if @user.nil?
+
     @shop = Shop.new(shop_params)
+    @shop.user_id = @user.id
 
     respond_to do |format|
       if @shop.save
-        format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
+        format.html { redirect_to @shop, notice: '创建成功.' }
         format.json { render action: 'show', status: :created, location: @shop }
       else
         format.html { render action: 'new' }
@@ -43,7 +49,7 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
+        format.html { redirect_to @shop, notice: '更新成功.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -70,6 +76,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:title, :user_id, :region_id, :city_id, :district_id, :detail_address, :content, :contact_name, :contact_phone, :website, :source, :source_url, :is_processed)
+      params.require(:shop).permit(:title, :typo, :user_id, :region_id, :city_id, :district_id, :detail_address, :content, :contact_name, :mobile_phone, :email, :website, :source, :source_url, :is_processed)
     end
 end

@@ -16,6 +16,26 @@
         </div>
       </article>
 
+      <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1" style="border-left: 1px solid #d9d9d9;">
+        <div class="text-center">
+          <br/><br/>
+          <%=link_to new_shop_path(type: 'user') do %>
+            <i class="fa fa-fire fa-5x"></i>
+            <h3>微名片</h3>
+          <% end %>
+        </div>
+      </article>
+
+      <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1" style="border-left: 1px solid #d9d9d9;">
+        <div class="text-center">
+          <br/><br/>
+          <%=link_to new_shop_path(type: 'shop') do %>
+            <i class="fa fa-comments fa-5x"></i>
+            <h3>开微店</h3>
+          <% end %>
+        </div>
+      </article>
+
       <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
         <article class="entry type-post style-thumbnail-text col-sm-6 col-md-2 colheight-sm-1">
           <div class="text-center">

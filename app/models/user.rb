@@ -36,11 +36,18 @@ class User < ActiveRecord::Base
   
   #{"email"=>"s@", "cate_id"=>"足疗师", "name"=>"sdsd", "summary"=>"awaww", "sex"=>"false", "age"=>"22", "education"=>"中专/技校", "work_year"=>"1-2年", "content"=>"awe", 
   # "mobile_phone"=>"18088887889", "qq"=>"3423", "region_id"=>"16", "city_id"=>"17", "district_id"=>"17"}
-  def self.get(mobile_phone, email)
+  def self.get(mobile_phone, email, typo = 'shop')
     return if mobile_phone.blank? && email.blank?
     user = self.find_by(mobile_phone: mobile_phone)
     user ||= self.find_by(email: email)
-    user ||= self.create!(email: email, mobile_phone: mobile_phone, default_password:ENV['DEFAULT_PASSWORD'], password: ENV['DEFAULT_PASSWORD'].dup, password_confirmation: ENV['DEFAULT_PASSWORD'].dup)
+    user ||= self.create!(
+      email: email, 
+      mobile_phone: mobile_phone, 
+      default_password: ENV['DEFAULT_PASSWORD'], 
+      password: ENV['DEFAULT_PASSWORD'].dup, 
+      password_confirmation: ENV['DEFAULT_PASSWORD'].dup,
+      typo: typo
+    )
     user
   end
 

@@ -4,9 +4,12 @@
   <div class="form-inputs">
     <%= f.input :name, required: true %>
     <%= f.input :mobile_phone, required: true, 
-        :input_html => {:maxlength => 11, size: 40}, 
-        hint: '请保证您的手机能够正确的接收到验证码' %>
-    <%= f.input :email %>
+        hint: '请保证您的手机能够正确的接收到验证码',
+        input_html: { value: current_user.try(:mobile_phone) } %>
+    <%= f.input :email, required: true, 
+        hint: '请输入接收简历的邮箱地址',
+        input_html: { value: current_user.try(:email) } %>
+    <hr/>
     <%= f.input :qq %>
     <hr/>
     <%= f.input :cate_id, collection: ApplicationHelper::JOB_CATES, include_blank: false  %>

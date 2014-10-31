@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-3 col-sm-12">
+    <h1>开通微名片</h1>
+    <div class="hidden-xs hidden-sm">
+      <div class="list-group">
+        <a href="#" class="list-group-item active">
+          <h4 class="list-group-item-heading">什么是微名片？</h4>
+          <p class="list-group-item-text">微名片是一种适用于在微信上、QQ上传递的个人或企业名片。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">微名片适用范围？</h4>
+          <p class="list-group-item-text">微名片适用于个人经纪人、足浴足疗行业精英、行业求职者等。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">如何开通微名片？</h4>
+          <p class="list-group-item-text">你只需要填写右侧的信息，即刻开通。微名片会通过短信形式发送到你的手机号。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">如何修改和定制？</h4>
+          <p class="list-group-item-text">通过你的手机号登录本站，随时更新和定制，查看访客留言等。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">如何推广微名片？</h4>
+          <p class="list-group-item-text">微名片自动生成二维码，适用于在QQ、微博、微信、陌陌等社交网络中传播和分享。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">需要帮助？</h4>
+          <p class="list-group-item-text">
+            <%= render 'layouts/qq_links' %>
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-md-offset2 col-sm-12">
+    <%= simple_form_for(@shop) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :typo, as: :hidden, input_html: { value: params[:type] } %>
+      
+      <div class="form-inputs">
+        <%= f.input :mobile_phone, required: true, hint: '请确保输入的手机号能够接收到短信验证码' %>
+        <%= f.input :email, required: true %>
+        
+        <hr/>
+        <%= f.input :title, required: true, hint: "请输入微名片的标题" %>
+        <%= f.input :content, :input_html => {:rows => 12} %>
+        <%= f.association :region %>
+        <%= f.association :city %>
+        <%= f.association :district %>
+        <%= f.input :detail_address %>
+        
+        <%= f.input :contact_name %>
+        <%= f.input :website, placeholder: '选填外链地址（微博、个人主页、网站等)' %>
+      </div>
+      <hr/>
+      <div class="form-actions">
+        <%= f.button :submit, class: 'btn btn-primary btn-lg' %>
+      </div>
+    <% end %>
+  </div>
+</div>

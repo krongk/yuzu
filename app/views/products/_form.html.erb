@@ -2,10 +2,14 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-   
     <%= f.input :mobile_phone, required: true, 
-        hint: '请保证您的手机能够正确的接收到验证码'  %>
-    <%= f.input :email %>
+        hint: '请保证您的手机能够正确的接收到验证码',
+        input_html: { value: current_user.try(:mobile_phone) } %>
+    <%= f.input :email, required: true, 
+        hint: '请输入接收简历的邮箱地址',
+        input_html: { value: current_user.try(:email) } %>
+    <hr/>
+
     <hr/>
     <%= f.input :cate_id, collection: ApplicationHelper::PRODUCT_CATES.collect{|s| [s,ApplicationHelper::PRODUCT_CATES.index(s)]}, selected: params[:cate_id],include_blank: false %>
     <%= f.input :title, required: true %>

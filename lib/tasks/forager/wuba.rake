@@ -7,7 +7,7 @@ namespace :forager do
     #link: http://qy.58.com/9874515439110/
     # opt = {region_id: 1, city_id: 2, district_id: 2}
     def extract_shop(link, opt = {})
-      puts "extract_shop: #{link}"
+      #puts "extract_shop: #{link}"
       source = 'wuba'
       source_url = link
       title = nil
@@ -20,17 +20,17 @@ namespace :forager do
       picture_urls = [] #can not fetch pictures
 
       page = Nokogiri::HTML(open(link))
-      title = page.css('h1').text
+      title = page.css('h1').text if page.css('h1')
       detail_address = page.css('td.adress span').text if page.css('td.adress span')
 
       trs = page.css('div.basicMsg table tr')
       if trs.size == 5
-        contact_name = trs[2].css('td')[0].text
+        contact_name = trs[2].css('td')[0].text if trs[2].css('td')[0]
         mobile_phone_url = trs[2].css('td').at_css('img')['src'] if trs[2].css('td').at_css('img')
         email_link = trs[3].css('td').at_css('img')['src'] if trs[3].css('td').at_css('img')
         website = trs[3].css('td').at_css('a')['href'] if trs[3].css('td').at_css('a')
       end
-      content = page.css('div.compIntro').text
+      content = page.css('div.compIntro').text if page.css('div.compIntro')
 
       shop = Shop.find_or_initialize_by(title: title.strip, source: source, source_url: source_url)
       shop.city_id = opt[:region_id] if shop.city_id.blank?
@@ -55,7 +55,7 @@ namespace :forager do
 
     # http://ya.58.com/zpanmo/17794521644161x.shtml
     def extract_job(user_id, link)
-      puts "extract_job: #{link}"
+      #puts "extract_job: #{link}"
       return if user_id.nil?
       title = nil
       cate_id = nil
@@ -67,7 +67,7 @@ namespace :forager do
       detail_address = nil
 
       page = Nokogiri::HTML(open(link))
-      title = page.css('h1').text
+      title = page.css('h1').text if page.css('h1')
       trs = page.css('li.condition')
       if trs.size > 2
         #get cate: 按摩师 (招10人)
@@ -123,6 +123,7 @@ namespace :forager do
     #=========================task start =======================
     desc "Forager 58.com job from: http://cd.58.com/zpanmo/"
     task job: :environment do
+      error_count = 0
       Forager::WubaRunKey.where(is_processed: 'n').find_each do |run_key|
         flag = 'f'
         begin
@@ -138,7 +139,6 @@ namespace :forager do
           lists.each do |dl|
             links = dl.css("a").map{|s| s['href'] }.compact
             #next unless links.size == 2
-            puts links
             shop = extract_shop(links.pop, city_id: City.find_by(name: run_key.title).try(:id))
             #next if shop.nil?
             extract_job(shop.user_id, links.pop)
@@ -147,7 +147,8 @@ namespace :forager do
           flag = 'y'
         rescue => ex
           puts ex.message
-          exit
+          error_count += 1
+          exit if error_count > 10
         end
         puts "processed run key : #{run_key.short_title} -> #{flag}"
         run_key.is_processed = flag
@@ -164,12 +165,22 @@ namespace :forager do
     end
 
     desc "get run keys from: http://www.58.com/changecity.aspx"
-    task genrate_run_key: :environment do
+    task genrate_run_keys: :environment do
       link = "http://www.58.com/changecity.aspx"
       page = Nokogiri::HTML(open(link))
       page.css("dl dd a").each do |a|
         Forager::WubaRunKey.find_or_create_by(typo: 'job', title: a.text, short_title: a['href'].sub(/.*\/\/(.*)\.58\.com\//, '\1') )
         puts a['href']
+      end
+    end
+
+    desc "reset all run keys set is_processed = 'n'"
+    task reset_run_keys: :environment do
+      unless Forager::WubaRunKey.where(is_processed: 'n').any?
+        Forager::WubaRunKey.update_all(is_processed: 'n')
+        puts "reseted all"
+      else
+        puts "has not processed records"
       end
     end
 

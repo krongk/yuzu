@@ -26,3 +26,8 @@ end
 every 2.days do 
   rake "page:content_cleanup"
 end
+
+every 3.days do 
+  rake "forager:wuba:reset_run_keys"
+  rake "forager:wuba:job"
+end

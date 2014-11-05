@@ -1,0 +1,17 @@
+---
+en:
+  active_record:
+    models:
+      forager:
+        wuba_run_key: Wuba run key
+    attributes:
+      forager:
+        wuba_run_key:
+          typo: Typo
+          title: Title
+          short_title: Short title
+          is_processed: Is processed
+    errors:
+      wuba_run_key: 
+  helpers:
+    wuba_run_key: 

@@ -28,10 +28,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  validates :mobile_phone,
-  :uniqueness => {
-    :case_sensitive => false
-  }, :format => {with: /\A1(3|5|6|7|8|9)[0-9]{9}\z/, message: "请输入正确的手机号码"}
+  # validates :mobile_phone,
+  # :uniqueness => {
+  #   :case_sensitive => false
+  # }, :format => {with: /\A1(3|5|6|7|8|9)[0-9]{9}\z/, message: "请输入正确的手机号码"}
   ####################===to allow login with email OR mobile_phone end==========================================
   
   #{"email"=>"s@", "cate_id"=>"足疗师", "name"=>"sdsd", "summary"=>"awaww", "sex"=>"false", "age"=>"22", "education"=>"中专/技校", "work_year"=>"1-2年", "content"=>"awe", 
@@ -49,6 +49,19 @@ class User < ActiveRecord::Base
       typo: typo
     )
     user
+  end
+
+  def self.get_tmp_user(name: 'tmp')
+    begin
+      email = "#{SecureRandom.hex(2)}@zuyu114.com"
+    end while User.exists?(:email => email )
+
+    user = User.create!(
+      :name => name, 
+      :email => email,
+      :mobile_phone => '18000000000',
+      :password => 'zuyu114', 
+      :password_confirmation => 'zuyu114')
   end
 
 end

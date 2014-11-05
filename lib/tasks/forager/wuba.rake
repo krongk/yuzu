@@ -7,6 +7,7 @@ namespace :forager do
     #link: http://qy.58.com/9874515439110/
     # opt = {region_id: 1, city_id: 2, district_id: 2}
     def extract_shop(link, opt = {})
+      puts "extract_shop: #{link}"
       source = 'wuba'
       source_url = link
       title = nil
@@ -31,22 +32,31 @@ namespace :forager do
       end
       content = page.css('div.compIntro').text
 
-      shop = Shop.find_or_initialize_by(title: title, source: source, source_url: source_url)
+      shop = Shop.find_or_initialize_by(title: title.strip, source: source, source_url: source_url)
       shop.city_id = opt[:region_id] if shop.city_id.blank?
       shop.city_id = opt[:city_id] if shop.city_id.blank?
       shop.city_id = opt[:district_id] if shop.city_id.blank?
       shop.detail_address = detail_address if shop.detail_address.blank?
-      shop.contact_name = contact_name if shop.contact_name.blank?
+      shop.contact_name = contact_name.strip if shop.contact_name.blank?
       shop.mobile_phone_url = mobile_phone_url if shop.mobile_phone_url.blank?
       shop.email_url = email_url if shop.email_url.blank?
-      shop.website = website if shop.website.blank?
-      shop.content = content if shop.content.blank?
-      shop.save
-      shop
+      shop.website = website.strip if shop.website.blank?
+      shop.content = content.strip if shop.content.blank?
+      #tmp
+      if shop.user_id.nil?
+        user = User.get_tmp_user(name: title.strip)
+        shop.user_id = user.id
+        shop.mobile_phone = user.mobile_phone
+        shop.email = user.email
+      end
+      shop.save!
+      shop.reload
     end
 
     # http://ya.58.com/zpanmo/17794521644161x.shtml
-    def extract_job(shop_id, link)
+    def extract_job(user_id, link)
+      puts "extract_job: #{link}"
+      return if user_id.nil?
       title = nil
       cate_id = nil
       salary = nil
@@ -59,31 +69,89 @@ namespace :forager do
       page = Nokogiri::HTML(open(link))
       title = page.css('h1').text
       trs = page.css('li.condition')
-      if trs.size == 3
+      if trs.size > 2
         #get cate: 按摩师 (招10人)
-        txt = page.css('li.condition')[1].css('div').after('span').text
-        txt = txt.sub(/\(.*\)/, '').strip
-        cate_id = ApplicationHelper::JOB_CATES.index(txt)
+        txt = page.css('li.condition')[1].css('div').after('span')
+        txt = txt.text.sub(/\(.*\)/, '').strip if txt
+        cate_id = ApplicationHelper::JOB_CATES.index(txt) if txt
         #
+        addr = trs.find{|tr| tr.css("span.area")}
+        spans = addr.css("span")
+        if spans.size == 3
+          detail_address = spans[1].text
+          city_tag = spans[2].css("a")[0]
+          city_txt = city_tag.text if city_tag
+          city = City.find_by(name: city_txt)
+          if city
+            city_id = city.id
+            region_id = city.region_id
+          end
+
+          district_tag = spans[2].css("a")[-1]
+          district_txt = district_tag.text if district_tag
+          district = District.where(["name regexp ?", district_txt]).first if district_txt
+          if district
+            district_id = district.id
+            city_id = district.city_id if city_id.nil?
+          end
+        else
+          raise 'address line has not 3 spans'
+        end
+      else
+        raise 'trs has not >2 tr'
       end
 
       salary = page.css('span.salaNum').text if page.css('span.salaNum')
+      content = page.css('div.posMsg').text if page.css('div.posMsg')
 
+      job = Job.new
+      job.user_id = user_id
+      job.cate_id = cate_id
+      job.cate_id = 1 if job.cate_id.nil?
+      job.title = title.strip
+      job.salary = salary.strip
+      job.content = content.strip
+      job.region_id = region_id
+      job.city_id = city_id
+      job.district_id = district_id
+      #tmp
+      job.mobile_phone = "18000000000"
+      job.email = "forager@zuyu114.com"
+      job.save!
     end
 
     #=========================task start =======================
-    desc "Forager 58.com job from: http://{city}.58.com/zpanmo/"
+    desc "Forager 58.com job from: http://cd.58.com/zpanmo/"
     task job: :environment do
-      begin
-        page = Nokogiri::HTML(open("http://ms.58.com/zpanmo/")) 
-        page.css('div#infolist dl').each do |dl|
-          links = dl.css("a").map{|s| s['href'] }
-          next unless links.size == 2
-          shop = extract_shop(links.pop, city_id: 2)
-          next if shop.nil?
-          extract_job(shop.id, links.pop)
+      Forager::WubaRunKey.where(is_processed: 'n').find_each do |run_key|
+        flag = 'f'
+        begin
+          #保健按摩招聘
+          link = "http://#{run_key.short_title}.58.com/zpanmo/"
+          puts "----------#{link}---------------"
+          page = Nokogiri::HTML(open(link)) 
+          lists = page.css('div#infolist dl')
+          if lists.size == 0
+            puts "can not get the correct page"
+            exit
+          end
+          lists.each do |dl|
+            links = dl.css("a").map{|s| s['href'] }.compact
+            #next unless links.size == 2
+            puts links
+            shop = extract_shop(links.pop, city_id: City.find_by(name: run_key.title).try(:id))
+            #next if shop.nil?
+            extract_job(shop.user_id, links.pop)
+            sleep( rand(300) )
+          end
+          flag = 'y'
+        rescue => ex
+          puts ex.message
+          exit
         end
-      rescue => ex
+        puts "processed run key : #{run_key.short_title} -> #{flag}"
+        run_key.is_processed = flag
+        run_key.save
       end
     end
 
@@ -93,6 +161,16 @@ namespace :forager do
 
     desc "TODO"
     task service: :environment do
+    end
+
+    desc "get run keys from: http://www.58.com/changecity.aspx"
+    task genrate_run_key: :environment do
+      link = "http://www.58.com/changecity.aspx"
+      page = Nokogiri::HTML(open(link))
+      page.css("dl dd a").each do |a|
+        Forager::WubaRunKey.find_or_create_by(typo: 'job', title: a.text, short_title: a['href'].sub(/.*\/\/(.*)\.58\.com\//, '\1') )
+        puts a['href']
+      end
     end
 
   end

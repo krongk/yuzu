@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029144216) do
+ActiveRecord::Schema.define(version: 20141104073436) do
 
   create_table "admin_channels", force: true do |t|
     t.integer  "user_id"
@@ -129,11 +129,20 @@ ActiveRecord::Schema.define(version: 20141029144216) do
 
   add_index "districts", ["city_id"], name: "index_districts_on_city_id", using: :btree
 
+  create_table "forager_wuba_run_keys", force: true do |t|
+    t.string   "typo",         default: "job"
+    t.string   "title"
+    t.string   "short_title"
+    t.string   "is_processed", default: "n"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jobs", force: true do |t|
     t.integer  "user_id"
-    t.integer  "cate_id",        default: 0
-    t.string   "title"
-    t.string   "mobile_phone"
+    t.integer  "cate_id",        default: 0,   null: false
+    t.string   "title",                        null: false
+    t.string   "mobile_phone",                 null: false
     t.string   "email"
     t.string   "salary"
     t.text     "content"
@@ -163,6 +172,7 @@ ActiveRecord::Schema.define(version: 20141029144216) do
     t.string   "title"
     t.string   "source_type"
     t.string   "source_id"
+    t.string   "external_url",       limit: 128
     t.string   "asset_file_name"
     t.string   "asset_content_type"
     t.integer  "asset_file_size"
@@ -201,22 +211,23 @@ ActiveRecord::Schema.define(version: 20141029144216) do
 
   create_table "resumes", force: true do |t|
     t.integer  "user_id"
-    t.integer  "cate_id",      default: 0
-    t.string   "name"
+    t.integer  "cate_id",                 default: 0,   null: false
+    t.string   "name",                                  null: false
     t.text     "summary"
     t.string   "sex"
     t.string   "age"
     t.string   "education"
     t.string   "work_year"
     t.text     "content"
-    t.string   "phone"
+    t.string   "mobile_phone", limit: 32,               null: false
+    t.string   "email",        limit: 32
     t.string   "qq"
     t.integer  "region_id"
     t.integer  "city_id"
     t.integer  "district_id"
-    t.integer  "pv_count",     default: 0
-    t.integer  "fav_count",    default: 0
-    t.string   "is_processed", default: "n"
+    t.integer  "pv_count",                default: 0
+    t.integer  "fav_count",               default: 0
+    t.string   "is_processed",            default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -238,7 +249,7 @@ ActiveRecord::Schema.define(version: 20141029144216) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "shops", force: true do |t|
-    t.string   "title"
+    t.string   "title",                                      null: false
     t.integer  "user_id"
     t.integer  "region_id"
     t.integer  "city_id"
@@ -246,11 +257,14 @@ ActiveRecord::Schema.define(version: 20141029144216) do
     t.string   "detail_address"
     t.text     "content"
     t.string   "contact_name"
-    t.string   "contact_phone"
+    t.string   "mobile_phone",     limit: 64,                null: false
+    t.string   "mobile_phone_url", limit: 128
+    t.string   "email",            limit: 64
+    t.string   "email_url",        limit: 128
     t.string   "website"
     t.string   "source"
     t.string   "source_url"
-    t.string   "is_processed",   default: "n"
+    t.string   "is_processed",                 default: "n"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -295,7 +309,7 @@ ActiveRecord::Schema.define(version: 20141029144216) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "phone"
+    t.string   "mobile_phone"
     t.string   "default_password",       default: "000000"
     t.string   "typo",                   default: "unknown"
     t.string   "is_processed",           default: "n"

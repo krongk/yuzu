@@ -19,6 +19,9 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    @shop = @job.user.shop
+    @cate_name = ApplicationHelper::JOB_CATES[@job.cate_id]
+    increase_pv(@job)
   end
 
   # GET /jobs/new

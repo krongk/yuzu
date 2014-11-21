@@ -1,31 +1,51 @@
-<h1><%= @cate_name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>标题</th>
-      <th>联系电话</th>
-      <th>地址</th>
-      <th>内容</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= link_to product.title, product %></td>
-        <td><%= product.mobile_phone %></td>
-        <td><%= product.region.try(:name) %><%= product.city.try(:name) %><%= product.district.try(:name) %><%= product.detail_address %></td>
+<div id="content" class="content section row">
 
-        <td><%= get_short_content(product.content) %></td>
-        <% if user_signed_in? && current_user.id == product.user_id %>
-          <td><%= link_to '修改', edit_product_path(product) %></td>
-          <td><%= link_to '删除', product, method: :delete, data: { confirm: '删除以后无法恢复，确定要删除吗?' } %></td>
+  <div class="col-md-8 bg-base col-lg-8 col-xl-9">
+    <div class="pull-right"><%= link_to '发布免费信息', new_product_path(cate_id: params[:cate_id]), class: 'btn btn-primary' %></div>
+    <h1><%= @cate_name %></h1>
+    <% if mobile_device? %>
+      <ul class="list-unstyled">
+        <% @products.each do |product| %>
+          <li style="margin-bottom: 10px;">
+            <strong><%= link_to product.title, product %></strong><br/>
+            [<%= ApplicationHelper::PRODUCT_CATES[product.cate_id] %>]
+            <%= product.region.try(:name) %><%= product.city.try(:name) %><%= product.district.try(:name) %><%= product.detail_address %>
+            <%= distance_of_time_in_words_to_now(product.updated_at) %>前
+          </li>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </ul>
+    <% else %>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>标题</th>
+            <th>地址</th>
+            <th>发布时间</th>
+          </tr>
+        </thead>
 
-<br>
-<%= link_to '我要发布企业信息', new_product_path(cate_id: ApplicationHelper::PRODUCT_CATES.index(@cate_name)), class: 'btn btn-primary' %>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= link_to product.title, product %></td>
+              <td><%= product.region.try(:name) %><%= product.city.try(:name) %><%= product.district.try(:name) %><%= product.detail_address %></td>
+              <td><%= distance_of_time_in_words_to_now(product.updated_at) %>前</td>
+              <% if user_signed_in? && current_user.id == product.user_id %>
+                <td><%= link_to '修改', edit_product_path(product) %></td>
+                <td><%= link_to '删除', product, method: :delete, data: { confirm: '删除以后无法恢复，确定要删除吗?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <%= will_paginate @products %>
+  </div><!--/.col-md-8.col-lg-8.col-xl-9-->
+
+  <div class="sidebar col-md-6 col-lg-4 col-xl-3">
+    <%= render partial: 'sidebar' %>
+  </div><!--/.sidebar col-md-4 col-lg-4 col-xl-3-->
+
+</div><!--/#content-->

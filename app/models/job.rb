@@ -6,12 +6,10 @@ class Job < ActiveRecord::Base
   belongs_to :city
   belongs_to :district
 
-   #empty
-  validates :mobile_phone, :title, :cate_id,  presence: true
-  #length
-  validates :mobile_phone, length: { is: 11 }
-  #format
-  validates :mobile_phone, format: { with: /\A1(3|5|8|9)[0-9]{9}\z/, message: "请输入正确的手机号码" }
+  #only use to find or create user, not need to store in job table
+  attr_accessor :mobile_phone, :email
+  #empty
+  validates :title, :cate_id,  presence: true
 
   #搜索
   def self.search(search)
@@ -20,5 +18,9 @@ class Job < ActiveRecord::Base
     else
       []
     end
+  end
+
+  def self.recent(count = 10)
+    Job.order("updated_at DESC").limit(count)
   end
 end

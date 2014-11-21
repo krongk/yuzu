@@ -23,6 +23,32 @@ module ApplicationHelper
     html.html_safe
   end
 
+  #obj = shop
+  def show_region(obj)
+    html = []
+    html << link_to(obj.region.name, region_path(obj.region)) if obj.region_id
+    html << link_to(obj.city.name, city_path(obj.city)) if obj.city_id
+    html << link_to(obj.district.name, district_path(obj.district)) if obj.district_id
+    html.join('&nbsp;').html_safe
+  end
+  def show_mobile_phone(phone)
+    if phone == '18000000000'
+      return link_to '联系我们', '#'
+    else
+      phone
+    end
+  end
+  def show_email(email)
+    if email =~ /zuyu114.com/i
+      return link_to '联系我们', '#'
+    else
+      email
+    end
+  end
+  def show_website(url)
+
+  end
+
   def title(page_title)
     content_for(:title){ page_title}
   end
@@ -185,4 +211,11 @@ module ApplicationHelper
     slice_pages
   end
 
+  ################################################
+  #############helper for controller####################
+  #obj = job/shop/user
+  def increase_pv(obj)
+    obj.pv = obj.pv + 1
+    obj.save!
+  end
 end

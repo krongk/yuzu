@@ -1,0 +1,45 @@
+<aside class="widget">
+
+  <h3 class="widget-title ribbon"><span>最新招聘信息</span></h3>
+
+  <ul class="entries">
+    <% Job.recent.each do |job| %>
+      <li class="entry style-recent-list type-post">
+        <span class="comments-count-balloon"><%= job.id %></span>
+        <%= link_to job.title, job_path(job), class: 'entry-title', rel: 'bookmark' %>
+      </li>
+    <% end %>
+  </ul>
+
+</aside><!--/.widget-->
+
+<aside class="widget">
+
+  <h2 class="widget-title ribbon"><span>最新资讯信息</span></h2>
+
+  <div class="entries row">
+    <% Admin::Page.recent(6).each do |post| %>
+      <article class="type-post style-media-list media col-sm-6 col-md-12">
+
+        <!-- to disable lazy loading, remove data-src and data-src-retina -->
+        <img src="<%= post.thumb_image_path %>" data-src="<%= post.thumb_image_path %>" data-src-retina="<%= post.thumb_image_path %>" width="80" height="80" class="media-object pull-left" alt="<%= post.title %>" style="opacity: 1;">
+
+        <!--fallback for no javascript browsers-->
+        <noscript>
+          &lt;img src="<%= post.thumb_image_path %>" alt=""&gt;
+        </noscript>
+
+        <div class="media-body">
+          <h3 class="entry-title">
+            <%=link_to post.title, post_path(post), rel: "bookmark" %>
+          </h3>
+          <div class="entry-meta">
+            <span class="entry-date"><%= distance_of_time_in_words_to_now(post.updated_at) %>前</span>
+            <span class="category"><%= link_to post.channel.title, channel_path(post.channel.id) %></span>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  </div>
+
+</aside><!--/.widget-->

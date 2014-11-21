@@ -34,7 +34,11 @@ class Admin::Page < ActiveRecord::Base
   end
 
   def thumb_image_path
-    self.image_path.sub(/content/, 'thumb')
+    if self.image_path.blank?
+      "/assets/rand230/230x230_#{rand(10)}.jpg"
+    else
+      self.image_path.sub(/content/, 'thumb')
+    end
   end
 
   # "H|C|F" => ['H', 'C', 'F']

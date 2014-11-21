@@ -6,13 +6,19 @@ RainCms::Application.routes.draw do
   resources :notifications
   resources :pictures
   resources :products
+
   resources :jobs
+  
   resources :resumes do
     member do
       get 'preview'
     end
   end
-  resources :shops
+  resources :shops do
+    member do 
+      get 'm'
+    end
+  end
 
 
   resources :comments
@@ -40,7 +46,7 @@ RainCms::Application.routes.draw do
   #routes for front ==============================
   root :to => "welcome#index"
   get "dashboard/index", as: 'user_root' #to use this as user login root
-  get 'dashboard/post'
+  get 'dashboard/post', as: ''
   
   #match search/tag special path
   match '/search(/page/:page)', to: "welcome#search", via: :get, as: 'search'

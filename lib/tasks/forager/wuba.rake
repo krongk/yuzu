@@ -115,8 +115,6 @@ namespace :forager do
       job.city_id = city_id
       job.district_id = district_id
       #tmp
-      job.mobile_phone = "18000000000"
-      job.email = "forager@zuyu114.com"
       job.save!
     end
 

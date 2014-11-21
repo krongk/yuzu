@@ -1,3 +1,24 @@
-<h1><%= @post.title %></h1>
-<hr/>
-<%= raw @post.content %>
+<div id="content" class="content section row">
+  <div class="col-md-8 bg-base col-lg-8 col-xl-9">
+    <div class="ribbon ribbon-highlight">
+      <ol class="breadcrumb ribbon-inner">
+        <li><%= link_to '足浴114', '/' %></li>
+        <li><%= link_to @channel.title, channel_path(@channel) %></li>
+        <li class="active"><%= link_to '发布信息', '/dashboard/post' %></li>
+      </ol>
+    </div>
+
+    <header class="page-header">
+      <h2 class="page-title">
+        <%= @post.title %>
+      </h2>
+    </header>
+    <%= raw @post.content %>
+    <%= render partial: 'layouts/duoshuo', locals: { post: @post } %>
+  </div><!--/.col-md-8.col-lg-8.col-xl-9-->
+
+  <div class="sidebar col-md-4 col-lg-4 col-xl-3">
+    <%= render 'sidebar' %>
+  </div><!--/.sidebar col-md-4 col-lg-4 col-xl-3-->
+
+</div><!--/#content-->

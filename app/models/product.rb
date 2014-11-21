@@ -6,12 +6,10 @@ class Product < ActiveRecord::Base
   belongs_to :city
   belongs_to :district
 
-  #empty
-  validates :mobile_phone, :cate_id, :title, presence: true
-  #length
-  validates :mobile_phone, length: { is: 11 }
-  #format
-  validates :mobile_phone, format: { with: /\A1(3|5|8|9)[0-9]{9}\z/, message: "请输入正确的手机号码" }
+  #only use to find or create user, not need to store in product table
+  attr_accessor :mobile_phone, :email
+
+  validates :cate_id, :title, presence: true
 
   #搜索
   def self.search(search)

@@ -10,7 +10,6 @@
         input_html: { value: current_user.try(:email) } %>
     <hr/>
 
-    <hr/>
     <%= f.input :cate_id, collection: ApplicationHelper::PRODUCT_CATES.collect{|s| [s,ApplicationHelper::PRODUCT_CATES.index(s)]}, selected: params[:cate_id],include_blank: false %>
     <%= f.input :title, required: true %>
     <%= f.input :content, :input_html => {:rows => 12}  %>

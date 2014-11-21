@@ -19,11 +19,16 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @shop = @product.user.shop
+    not_found if @shop.nil?
+    @cate_name = ApplicationHelper::JOB_CATES[@product.cate_id]
+    increase_pv(@product)
   end
 
   # GET /products/new
   def new
     @product = Product.new
+    @cate_name = ApplicationHelper::PRODUCT_CATES[params[:cate_id].to_i]
   end
 
   # GET /products/1/edit

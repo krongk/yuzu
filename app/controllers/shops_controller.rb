@@ -13,6 +13,11 @@ class ShopsController < ApplicationController
   def show
   end
 
+  #mobile index view
+  def m
+
+  end
+
   # GET /shops/new
   def new
     @shop = Shop.new

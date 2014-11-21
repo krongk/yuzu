@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   rolify
-  has_many :shops
+  has_one :shop
   has_many :resumes
   has_many :products
   has_many :jobs

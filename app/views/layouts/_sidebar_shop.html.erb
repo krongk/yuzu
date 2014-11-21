@@ -1,0 +1,21 @@
+<aside class="widget">
+
+  <h3 class="widget-title ribbon"><span><%= shop.title %></span></h3>
+
+  <div>
+    <%= simple_format shop.content %>
+    <%= show_website(shop.website) %>
+  </div>
+
+</aside><!--/.widget-->
+
+<aside class="widget">
+
+  <h3 class="widget-title ribbon"><span>企业微网</span></h3>
+
+  <ul class="entries coverageList aligncenter">
+    <li><img src="http://qrickit.com/api/qr?d=<%= shop_url(shop) %>&fgdcolor=000000&bgdcolor=f2f2f2&qrsize=200&t=p&e=m"></li>
+    <li><%= link_to '扫描二维码打开企业微网', m_shop_path(shop), target: '_blank' %></li>
+  </ul>
+
+</aside><!--/.widget-->

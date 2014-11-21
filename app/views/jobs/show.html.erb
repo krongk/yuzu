@@ -1,64 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div id="content" class="content section row">
 
-<p>
-  <strong>User:</strong>
-  <%= @job.user %>
-</p>
+  <div class="col-md-6 bg-base col-lg-8 col-xl-9">
 
-<p>
-  <strong>Cate:</strong>
-  <%= @job.cate_id %>
-</p>
+    <div class="ribbon ribbon-highlight">
+        <ol class="breadcrumb ribbon-inner">
+          <li><a href="/">首页</a></li>
+          <li><a href="/jobs">招聘信息</a></li>
+          <li class="active"><a href="/cate/<%= @job.cate_id %>/jobs"><%= @cate_name %>招聘</a></li>
+        </ol>
+    </div>
+    <header class="page-header">
+        <div class="page-meta pull-right hidden-xs">
+            <a href="#comments">
+                <span class="comments-count-balloon bg-primary"><%= @job.pv %><em>浏览次数</em></span>
+            </a>
+        </div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @job.title %>
-</p>
+        <h2 class="page-title">
+          招聘<%= @job.title %>
+        </h2>
+    </header>
 
-<p>
-  <strong>Mobile phone:</strong>
-  <%= @job.mobile_phone %>
-</p>
+    <article class="entry style-single type-post">        
+        <%= simple_format @job.content %>
+        <div class="entry-content indented">
+            <p class="lead">
+                <strong>薪资待遇:</strong><%= @job.salary %><br/>
+                <strong>联系人:</strong><%= @shop.contact_name %><br/>
+                <strong>联系地址:</strong><%= show_region(@shop) %><%= @shop.detail_address %><br/>
+                <strong>联系电话:</strong><%= show_mobile_phone @shop.mobile_phone %><br/>
+                <strong>电子邮件:</strong><%= show_email @shop.email %><br/>
+            </p>
+        </div>
+    </article>
 
-<p>
-  <strong>Email:</strong>
-  <%= @job.email %>
-</p>
+  </div><!--/.col-md-8.col-lg-8.col-xl-9-->
 
-<p>
-  <strong>Salary:</strong>
-  <%= @job.salary %>
-</p>
+  <div class="sidebar col-md-6 col-lg-4 col-xl-3">
+    <%= render partial: 'layouts/sidebar_shop', locals: { shop: @shop } %>
+  </div><!--/.sidebar col-md-4 col-lg-4 col-xl-3-->
 
-<p>
-  <strong>Content:</strong>
-  <%= @job.content %>
-</p>
-
-<p>
-  <strong>Region:</strong>
-  <%= @job.region %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @job.city %>
-</p>
-
-<p>
-  <strong>District:</strong>
-  <%= @job.district %>
-</p>
-
-<p>
-  <strong>Detail address:</strong>
-  <%= @job.detail_address %>
-</p>
-
-<p>
-  <strong>Is processed:</strong>
-  <%= @job.is_processed %>
-</p>
-
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>
+</div><!--/#content-->

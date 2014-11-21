@@ -32,19 +32,19 @@ namespace :forager do
       end
       content = page.css('div.compIntro').text if page.css('div.compIntro')
 
-      shop = Shop.find_or_initialize_by(title: title.strip, source: source, source_url: source_url)
+      shop = Shop.find_or_initialize_by(title: title.to_s.strip, source: source, source_url: source_url)
       shop.city_id = opt[:region_id] if shop.city_id.blank?
       shop.city_id = opt[:city_id] if shop.city_id.blank?
       shop.city_id = opt[:district_id] if shop.city_id.blank?
       shop.detail_address = detail_address if shop.detail_address.blank?
-      shop.contact_name = contact_name.strip if shop.contact_name.blank?
+      shop.contact_name = contact_name.to_s.strip if shop.contact_name.blank?
       shop.mobile_phone_url = mobile_phone_url if shop.mobile_phone_url.blank?
       shop.email_url = email_url if shop.email_url.blank?
-      shop.website = website.strip if shop.website.blank?
-      shop.content = content.strip if shop.content.blank?
+      shop.website = website.to_s.strip if shop.website.blank?
+      shop.content = content.to_s.strip if shop.content.blank?
       #tmp
       if shop.user_id.nil?
-        user = User.get_tmp_user(name: title.strip)
+        user = User.get_tmp_user(name: title.to_s.strip)
         shop.user_id = user.id
         shop.mobile_phone = user.mobile_phone
         shop.email = user.email
@@ -72,7 +72,7 @@ namespace :forager do
       if trs.size > 2
         #get cate: 按摩师 (招10人)
         txt = page.css('li.condition')[1].css('div').after('span')
-        txt = txt.text.sub(/\(.*\)/, '').strip if txt
+        txt = txt.text.sub(/\(.*\)/, '').to_s.strip if txt
         cate_id = ApplicationHelper::JOB_CATES.index(txt) if txt
         #
         addr = trs.find{|tr| tr.css("span.area")}
@@ -108,9 +108,9 @@ namespace :forager do
       job.user_id = user_id
       job.cate_id = cate_id
       job.cate_id = 1 if job.cate_id.nil?
-      job.title = title.strip
-      job.salary = salary.strip
-      job.content = content.strip
+      job.title = title.to_s.strip
+      job.salary = salary.to_s.strip
+      job.content = content.to_s.strip
       job.region_id = region_id
       job.city_id = city_id
       job.district_id = district_id

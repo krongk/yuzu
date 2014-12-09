@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
 
   def index
-
+    @channels = Admin::Channel.all
   end
 
   def search

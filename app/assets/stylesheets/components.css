@@ -512,6 +512,11 @@ ul.entries {
   font-size: 18px;
   line-height: 23px;
 }
+.style-grid .entry-title small{
+  line-height: 18px;
+}
+
+
 .row > .style-grid .entry-thumbnail {
   width: 100%;
   left: 0px;

@@ -33,7 +33,7 @@ module ApplicationHelper
   end
   def show_mobile_phone(phone)
     if phone == '18000000000'
-      return link_to '联系我们', '#'
+      return nil
     else
       phone
     end

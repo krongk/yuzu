@@ -1,6 +1,6 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
-  before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :set_shop, only: [:show, :m, :edit, :update, :destroy]
 
   # GET /shops
   # GET /shops.json
@@ -11,9 +11,10 @@ class ShopsController < ApplicationController
   # GET /shops/1
   # GET /shops/1.json
   def show
+    increase_pv(@shop)
   end
 
-  #mobile index view
+  #mobile view
   def m
 
   end
@@ -30,7 +31,6 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    puts "-------------------------#{shop_params[:typo]}"
     @user = current_user 
     @user ||= User.get(shop_params[:mobile_phone], shop_params[:email], shop_params[:typo])
     not_found if @user.nil?

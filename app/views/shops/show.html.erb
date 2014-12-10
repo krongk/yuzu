@@ -1,65 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div id="content" class="content section row">
 
-<p>
-  <strong>Title:</strong>
-  <%= @shop.title %>
-</p>
+  <div class="col-md-6 bg-base col-lg-8 col-xl-9">
 
-<p>
-  <strong>User:</strong>
-  <%= @shop.user.id %>
-</p>
+    <div class="ribbon ribbon-highlight">
+        <ol class="breadcrumb ribbon-inner">
+          <li><a href="/">首页</a></li>
+          <li><a href="/shops">商家信息</a></li>
+          <li class="active"><a href="/shops/<%= @shop.id %>"><%= @shop.title %></a></li>
+        </ol>
+    </div>
+    <header class="page-header">
+        <div class="page-meta pull-right hidden-xs">
+            <a href="#comments">
+                <span class="comments-count-balloon bg-primary"><%= @shop.pv %><em>访问次数</em></span>
+            </a>
+        </div>
 
-<p>
-  <strong>Region:</strong>
-  <%= @shop.region %>
-</p>
+        <h2 class="page-title">
+          <%= @shop.title %>
+        </h2>
+    </header>
 
-<p>
-  <strong>City:</strong>
-  <%= @shop.city %>
-</p>
+    <article class="entry style-single type-post">        
+        <%= simple_format @shop.content %>
+        <div class="entry-content indented">
+            <p class="lead">
+                <strong>联系人:</strong><%= @shop.contact_name %><br/>
+                <strong>联系地址:</strong><%= show_region(@shop) %><%= @shop.detail_address %><br/>
+                <strong>联系电话:</strong><%= show_mobile_phone(@shop.mobile_phone) || image_tag(@shop.mobile_phone_url) %><br/>
+                <strong>电子邮件:</strong><%= show_email @shop.email %><br/>
+            </p>
+        </div>
+    </article>
 
-<p>
-  <strong>District:</strong>
-  <%= @shop.district %>
-</p>
+    
+  </div><!--/.col-md-8.col-lg-8.col-xl-9-->
 
-<p>
-  <strong>Detail address:</strong>
-  <%= @shop.detail_address %>
-</p>
+  <div class="sidebar col-md-6 col-lg-4 col-xl-3">
+    <%= render partial: 'layouts/sidebar_shop', locals: { shop: @shop } %>
+  </div><!--/.sidebar col-md-4 col-lg-4 col-xl-3-->
 
-<p>
-  <strong>Content:</strong>
-  <%= @shop.content %>
-</p>
-
-<p>
-  <strong>Contact name:</strong>
-  <%= @shop.contact_name %>
-</p>
-
-
-<p>
-  <strong>Website:</strong>
-  <%= @shop.website %>
-</p>
-
-<p>
-  <strong>Source:</strong>
-  <%= @shop.source %>
-</p>
-
-<p>
-  <strong>Source url:</strong>
-  <%= @shop.source_url %>
-</p>
-
-<p>
-  <strong>Is processed:</strong>
-  <%= @shop.is_processed %>
-</p>
-
-<%= link_to 'Edit', edit_shop_path(@shop) %> |
-<%= link_to 'Back', shops_path %>
+</div><!--/#content-->

@@ -2,6 +2,8 @@ class ResumesController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_resume, only: [:show, :edit, :update, :destroy, :preview]
 
+  layout 'resume', only: [:show]
+
   # GET /resumes
   # GET /resumes.json
   def index
@@ -12,6 +14,7 @@ class ResumesController < ApplicationController
   # GET /resumes/1
   # GET /resumes/1.json
   def show
+    @user = @resume.user
   end
 
   # GET /resumes/new
@@ -52,6 +55,7 @@ class ResumesController < ApplicationController
   # PATCH/PUT /resumes/1
   # PATCH/PUT /resumes/1.json
   def update
+    authorize!(@resume)
     respond_to do |format|
       if @resume.update(resume_params)
         format.html { redirect_to @resume, notice: 'Resume was successfully updated.' }
@@ -66,6 +70,7 @@ class ResumesController < ApplicationController
   # DELETE /resumes/1
   # DELETE /resumes/1.json
   def destroy
+    authorize!(@resume)
     @resume.destroy
     respond_to do |format|
       format.html { redirect_to resumes_url }

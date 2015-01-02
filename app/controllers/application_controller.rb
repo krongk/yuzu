@@ -19,6 +19,19 @@ class ApplicationController < ActionController::Base
     not_found#  redirect_to root_path
   end
 
+  #obj = site/site_page
+  #call: authorize!(@site)
+  def authorize!(obj)
+    return if current_user.id == 1
+    begin
+      if obj.user_id != current_user.id
+        raise CanCan::AccessDenied.new('没有权限！' )
+      end
+    rescue 
+      raise CanCan::AccessDenied.new('没有权限！' )
+    end
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:mobile_phone, :email, :password, :password_confirmation, :remember_me) }

@@ -5,10 +5,16 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = if params[:cate_id]
-      Product.where(cate_id: params[:cate_id]).page(params[:page])
+    @products = if params[:user_id]
+      Product.where(user_id: params[:user_id])
     else
-      Product.page(params[:page])
+      Product.all
+    end
+    
+    @products = if params[:cate_id]
+      @products.where(cate_id: params[:cate_id]).page(params[:page])
+    else
+      @products.page(params[:page])
     end
     @products = current_user.products.page(params[:page]) if user_signed_in? && params[:user_id]
 
@@ -62,6 +68,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    authorize!(@product)
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -76,6 +83,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    authorize!(@product)
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url }

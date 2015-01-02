@@ -5,11 +5,18 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = if params[:cate_id]
-      Job.where(cate_id: params[:cate_id]).page(params[:page])
+    @jobs = if params[:user_id]
+      Job.where(user_id: params[:user_id])
     else
-      Job.page(params[:page])
+      Job.all
     end
+
+    @jobs = if params[:cate_id]
+      @jobs.where(cate_id: params[:cate_id]).page(params[:page])
+    else
+      @jobs.page(params[:page])
+    end
+    
     @jobs = current_user.jobs.page(params[:page]) if user_signed_in? && params[:user_id]
 
     @cate_name = ApplicationHelper::JOB_CATES[params[:cate_id].to_i]
@@ -60,6 +67,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    authorize!(@job)
     respond_to do |format|
       if @job.update(job_params)
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
@@ -74,6 +82,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    authorize!(@job)
     @job.destroy
     respond_to do |format|
       format.html { redirect_to jobs_url }

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--[if IE 7]><html class="ie ie7" lang="zh-CN"><![endif]-->
+<!--[if IE 8]><html class="ie ie8" lang="zh-CN"><![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!--><html lang="zh-CN"><!--<![endif]-->
+<!-- Mirrored from the8guild.com/themes/wordpress/domino/service/ -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="新俏佳人休闲按摩" />
+  <meta name="description" content="新俏佳人休闲按摩" />
+  <title>新俏佳人休闲按摩 </title>
+
+  <meta name='robots' content='noindex,follow' />
+ 
+  <link rel='stylesheet' id='contact-form-7-css'  href='/themes/domino/wp-content/plugins/contact-form-7/includes/css/stylesf39e.css?ver=4.0.1' type='text/css' media='all' />
+  <link rel='stylesheet' id='domino-core-css'  href='/themes/domino/wp-content/plugins/domino-core/assets/css/domino-core.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='domino-css'  href='/themes/domino/wp-content/themes/domino/style.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='domino-color-css'  href='/themes/domino/wp-content/themes/domino/css/colors/color-76bd22.css' type='text/css' media='all' />
+  
+  <script type='text/javascript' src='/themes/domino//wp-includes/js/jquery/jquery90f9.js?ver=1.11.1'></script>
+  <script type='text/javascript' src='/themes/domino//wp-includes/js/jquery/jquery-migrate.min1576.js?ver=1.2.1'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/libs/modernizr.custom.js'></script>
+  
+</head>
+
+<body class="home page page-id-70 page-template-default parallax" >
+    <div id="preloader">
+      <div id="status">&nbsp;</div>
+    </div>
+
+    
+    <!--Main screen background-->
+    <div class="mainBg" style="background-image: url(/assets/rand2560/<%= rand(10) %>.jpg);" data-stellar-background-ratio="0.5">
+        <div class="colorOverlay"></div>
+    </div>
+
+    <div class="down-arrow">
+        <a href="#" class="a scroll"></a>
+        <a href="#" class="b scroll"></a>
+    </div>
+
+    <!-- top logo & Login panel -->
+    <div class="topNav">
+        <div class="container">
+            <div class="logo_big">
+              <a href="/" rel="bookmark">
+                <img src="/assets/logo.png" data-src="/assets/logo.png" data-src-retina="/assets/logo-retina.png" width="244" height="56" alt="足浴114">
+              </a>
+            </div>
+            
+            <div class="login_panel">
+                <ul class="nav navbar-nav pull-right">
+                  <li><a href="/pages/about" class="loginOverBtn">关于我们</a></li>
+                  <li><a href="/dashboard/post" class="messageOverlayBtn">我要发布</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jumbotron greetings -->
+    <div class="container toValign">
+      <div class="jumbotron">
+        <span>
+          <%= show_region(@shop) %><%= @shop.detail_address %>
+        </span>
+        <h1>
+          <%= @shop.title %>
+        </h1>
+        <p>
+          <%= simple_format @shop.content %>
+        </p>
+        <% if @shop.contact_name %>
+          <h3><strong>联系人:</strong><%= @shop.contact_name %></h3>
+        <% end %>
+        <p class="jubotronButtonBlock">
+          <% if @user.is_active? %>
+            <a href="tel:<%= @user.mobile_phone %>" target="_blank" class="btn btn-primary btn-lg">拨打电话</a>
+          <% end %>
+          
+          <a href="<%= shop_path(@shop) %>" target="_blank" class="btn btn-default btn-lg">
+            了解更多
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <header class="header">
+
+      <!-- Main navigation panel -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="mainNavColorBg"></div>
+
+            <div class="container">
+                <img src="/assets/logo.png" class="colapsedLogo" alt="足浴114" width="244" height="56" />
+
+                <div class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <div class="menu active">
+                        <span class="burger-line bread top"></span>
+                        <span class="burger-line meat"></span>
+                        <span class="burger-line bread bottom"></span>
+                    </div>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                       <li class="logoMenuItem">
+                          <img src="/assets/logo.png" class="logoSmall" alt="足浴114" width="244" height="56" />
+                        </li>
+                        
+                        <!-- Top navigation mobile view -->
+                        <li class="mobileLogin"><a href="/" class="loginOverBtn">登录</a></li>
+                        <li class="mobileLogin"><a href="/dashboard/post" class="signOverlayBtn">发布</a></li>
+                        <% if @user.is_active? %>
+                          <li class="mobileLogin"><a href="tel: <%= @user.mobile_phone %>" class="messageOverlayBtn">联系</a></li>
+                        <% end %>
+ 
+                        <li id="menu-item-84" class="menu-item menu-item-type-custom menu-item-object-custom">
+                          <%= link_to user_jobs_path(@user) do %>
+                            <span>企业</span> 招聘信息 
+                          <% end %>
+                        </li>
+
+                        <% @user.active_cate_ids.each do |cate_id| %>
+                          <li id="menu-item-<%= cate_id %>" class="menu-item menu-item-type-custom menu-item-object-custom">
+                            <%= link_to user_products_path(@user, cate_id: cate_id) do %>
+                              <span>企业</span> <%= ApplicationHelper::PRODUCT_CATES[cate_id] %>
+                            <% end %>
+                          </li>
+                        <% end %>
+                        <li class="evenlopeItem messageOverlayBtn"><a href="#"><i class="icon-evenlope"></i></a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header><!-- #masthead -->
+
+  <div id="main" class="wrapper">
+
+    <!-- .header-->
+    <main class="content">
+
+      <section class="carouselSlides blockBgColorOvrlay" id="blog-posts-slider-bps">
+        <div class="container">
+          <h3>
+            最新信息
+          </h3>
+          <div id="carousel-blog-posts-slider-bps-generic" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <% flag = true %>
+              <% count = 0 %>
+              <% @user.recent_jobs(2).each do |job| %>
+                <div class="item <%= 'active' if flag %>">
+                  <div class="bps-featured-image">
+                    <img width="400" height="400" src="/assets/rand230/230x230_<%= rand(10) %>.jpg" class="attachment-medium wp-post-image" alt="post03" />
+                  </div>
+                  <div class="carousel-caption">
+                    <div class="postContent">
+                      <div class="postTitle">
+                        <h6>
+                          <%= job.title %>
+                        </h6>
+                        <span>
+                          <%= get_date(job.updated_at) %>
+                        </span>
+                      </div>
+                      <p>
+                        <%= get_short_content(job.content) %> [&hellip;]
+                      </p>
+                      <div class="postMeta">
+                        <a href="lorem-ipsum/index.html" class="comentsQty">
+                          <i class="fa fa-comments-o">
+                          </i>
+                          <%= rand(10) %>
+                        </a>
+                        <a href="#" class="domino-post-likes likes" data-dom-post-id="71">
+                          <i class="fa fa-heart">
+                          </i>
+                          <span>
+                            <%= rand(100) %>
+                          </span>
+                        </a>
+                        <div>
+                          <a href="<%= job_path(job) %>" class="btn btn-default btn-sm" >
+                            阅读更多
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% flag = false if flag  %>
+                <% count += 1 %>
+              <% end %>
+              <% @user.recent_products(2).each do |product| %>
+                <div class="item <%= 'active' if flag %>">
+                  <div class="bps-featured-image">
+                    <img width="400" height="400" src="/assets/rand230/230x230_<%= rand(10) %>.jpg" class="attachment-medium wp-post-image" alt="post03" />
+                  </div>
+                  <div class="carousel-caption">
+                    <div class="postContent">
+                      <div class="postTitle">
+                        <h6>
+                          <%= product.title %>
+                        </h6>
+                        <span>
+                          <%= get_date(product.updated_at) %>
+                        </span>
+                      </div>
+                      <p>
+                        <%= get_short_content(product.content) %> [&hellip;]
+                      </p>
+                      <div class="postMeta">
+                        <a href="lorem-ipsum/index.html" class="comentsQty">
+                          <i class="fa fa-comments-o">
+                          </i>
+                          <%= rand(10) %>
+                        </a>
+                        <a href="#" class="domino-post-likes likes" data-dom-post-id="71">
+                          <i class="fa fa-heart">
+                          </i>
+                          <span>
+                            <%= rand(100) %>
+                          </span>
+                        </a>
+                        <div>
+                          <a href="<%= product_path(product) %>" class="btn btn-default btn-sm" >
+                            阅读更多
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% flag = false if flag %>
+                <% count += 1 %>
+              <% end %>
+              <% if flag || count < 2 %>
+                <% Admin::Page.recent(2).each do |page| %>
+                  <div class="item <%= 'active' if flag %>">
+                    <div class="bps-featured-image">
+                      <img width="400" height="400" src="/assets/rand230/230x230_<%= rand(10) %>.jpg" class="attachment-medium wp-post-image" alt="post03" />
+                    </div>
+                    <div class="carousel-caption">
+                      <div class="postContent">
+                        <div class="postTitle">
+                          <h6>
+                            <%= page.title %>
+                          </h6>
+                          <span>
+                            <%= get_date(page.updated_at) %>
+                          </span>
+                        </div>
+                        <p>
+                          <%= get_short_content(page.content) %> [&hellip;]
+                        </p>
+                        <div class="postMeta">
+                          <a href="lorem-ipsum/index.html" class="comentsQty">
+                            <i class="fa fa-comments-o">
+                            </i>
+                            <%= rand(10) %>
+                          </a>
+                          <a href="#" class="domino-post-likes likes" data-dom-post-id="71">
+                            <i class="fa fa-heart">
+                            </i>
+                            <span>
+                              <%= rand(100) %>
+                            </span>
+                          </a>
+                          <div>
+                            <a href="/post/<%= page.id %>" class="btn btn-default btn-sm" >
+                              阅读更多
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-blog-posts-slider-bps-generic"
+            role="button" data-slide="prev">
+              <i class="fa fa-angle-left">
+              </i>
+            </a>
+            <a class="right carousel-control" href="#carousel-blog-posts-slider-bps-generic"
+            role="button" data-slide="next">
+              <i class="fa fa-angle-right">
+              </i>
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <div class="sloganInfo" style="background-image: url(/assets/rand2560/<%= rand(10) %>.jpg);"
+      data-stellar-background-ratio="0.5">
+        <div class="colorOverlay">
+        </div>
+        <div class="container">
+          <div class="jumbotron">
+            <span>
+              足浴114是一家
+            </span>
+            <h1>
+              足浴足疗行业O2O分类信息平台
+            </h1>
+            <p>
+              足浴114于2015年1月创立，定位于国内足浴足疗行业O2O消费服务平台，致力于为广大足浴足疗商家提供线上招聘、产品信息发布，开展线上业务，打造中国足浴足疗消费的时尚风向标。我们创新的‘位置+服务’模式，为3亿网民和7亿手机用户提供了方便有效的服务。
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- .content -->
+
+     <div class="clearboth"></div>
+  </div>
+  <!-- .wrapper -->
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/bootstrap.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/jquery.stellar.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/waypoints.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/owl.carousel.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/jquery.touchSwipe.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/jquery.shuffle.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/jquery-numerator.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/lightGallery.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/plugins/grid.js'></script>
+
+  <script type='text/javascript' src='/themes/domino//wp-content/plugins/domino-core/assets/js/domino-core.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/themes/domino/js/plugins/waypoints-sticky.min.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/themes/domino/js/plugins/smoothscroll.js'></script>
+  <script type='text/javascript' src='/themes/domino//wp-content/themes/domino/js/custom.js'></script>
+
+   
+  </body>
+
+<!-- Mirrored from the8guild.com/themes/wordpress/domino/service/ -->
+</html>
+
+
+
+
+

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://yobithemes.com/wb/html/dcard/index.html
+-->
+<html lang="en">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      <%= @resume.name %> | 足浴114
+    </title>
+    <!-- Bootstrap -->
+    <link href="/themes/vcard/assets/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Font Icon and Plugins -->
+    <link href="/themes/vcard/assets/font-awesome.min.css" rel="stylesheet">
+    <link href="/themes/vcard/assets/fontello.css" rel="stylesheet">
+    <link href="/themes/vcard/assets/magnific-popup.css" rel="stylesheet">
+    <link href="/themes/vcard/assets/animation.css" rel="stylesheet">
+    <!-- Theme of Design -->
+    <link href="/themes/vcard/assets/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+    queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file://
+    -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+      </script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+      </script>
+    <![endif]-->
+    <link rel="shortcut icon" href="assetsfaicon.png">
+    <link rel="apple-touch-icon" sizes="129x129" href="assetsicon.png">
+    <link href="/themes/vcard/assets/yourcss.css" rel="stylesheet">
+  </head>
+  
+  <body class=" pace-done">
+    <div class="pace  pace-inactive">
+      <div class="pace-progress" data-progress-text="100%" data-progress="99"
+      style="width: 100%;">
+        <div class="pace-progress-inner">
+        </div>
+      </div>
+      <div class="pace-activity">
+      </div>
+    </div>
+    <!--=========S tart Wrapper Page===================================-->
+    <div id="wrapper" style="display: block;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+            <!--=========S tart portrait section===================================-->
+            <header class="portrait">
+              <div class="bg-line">
+              </div>
+              <div class="body-portrait">
+                <!--=========S tart Note Slider===================================-->
+                <div class="box-note">
+                  <div id="slider-note" class="carousel slide" data-ride="carousel" data-interval="10000">
+                    <div class="carousel-inner">
+                      <div class="item active left">
+                        <%= @resume.summary %>
+                      </div>
+                      <div class="item next left">
+                        上足浴114可以找到我！
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--=========E nd Note Slider===================================-->
+                <!--=========S tart portrait image Section===================================-->
+                <div class="portrait-img-area">
+                  <% if @resume.sex %>
+                    <img src="/themes/vcard/assets/avatar-boy.png" alt="avatar" class="avatar">
+                  <% else %>
+                    <img src="/themes/vcard/assets/avatar-girl.png" alt="avatar" class="avatar">
+                  <% end %>
+
+                  <div class="profile-links">
+                    <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=<%= @resume.qq || '#'%>&amp;site=qq&amp;menu=yes" class="facebook" data-toggle="tooltip" data-placement="left"
+                    title="" data-original-title="QQ">
+                      <i class="fa fa-comment">
+                      </i>
+                    </a>
+                    <a href="tel:<%= @resume.mobile_phone || '#'%>" class="twitter" data-toggle="tooltip" data-placement="right"
+                    title="" data-original-title="电话">
+                      <i class="fa fa-phone">
+                      </i>
+                    </a>
+                  </div>
+                </div>
+                <!--=========E nd portrait image Section===================================-->
+                <!--=========S tart Show Yor Name Section===================================-->
+                <h1 class="name">
+                  <%= @resume.name %>
+                  <small>
+                    <%= ApplicationHelper::JOB_CATES[@resume.cate_id] %>
+                  </small>
+                </h1>
+                <img src="/themes/vcard/assets/arrow-down.png" alt="" class="img-arrow">
+                <a href="javascript:void(0)" class="btn btn-flat " id="open-content">
+                  个人简历
+                </a>
+                <img src="/themes/vcard/assets/arrow-down.png" alt="" class="img-arrow">
+                <!--=========S tart Show Yor Name Section===================================-->
+              </div>
+            </header>
+            <!--=========E nd portrait section===================================-->
+            <!--=========S tart Content section===================================-->
+            <section class="content" id="main-content">
+              <!--=========S tart navigation section===================================-->
+              <nav id="navigation" class="autofix_sb">
+                <ul class="navigation-list clearfix list-unstyled">
+                  <li class="active">
+                    <a href="#about" data-toggle="tab"
+                    data-menu="about">
+                      <i class="icon-user">
+                      </i>
+                      <span>
+                        个人介绍
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#resume" data-toggle="tab"
+                    data-menu="resume">
+                      <i class="icon-newspaper">
+                      </i>
+                      <span>
+                        工作简历
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#portfolio" data-toggle="tab"
+                    data-menu="portfolio">
+                      <i class="icon-folder-open">
+                      </i>
+                      <span>
+                        相册
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#blog" data-toggle="tab"
+                    data-menu="blog">
+                      <i class="icon-pencil">
+                      </i>
+                      <span>
+                        日志
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#contact" data-toggle="tab"
+                    data-menu="contact">
+                      <i class="icon-mail">
+                      </i>
+                      <span>
+                        联系
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <!--=========E nd navigation section===================================-->
+              <!--=========S tart tab content section===================================-->
+              <div class="tab-content">
+                <!--=========S tart About tab content section===================================-->
+                <div id="about" class="tab-pane  fade in  active">
+                  <div class="body-content">
+                     <%= render 'layouts/resume/about' %>
+                  </div>
+                </div>
+                <!--=========E nd About tab content section===================================-->
+                <!--=========S tart resume tab content section===================================-->
+                <div id="resume" class="tab-pane fade">
+                  <div class="body-content">
+                    暂时没有留下任何信息~
+                    <%#= render 'layouts/resume/work' %>
+                  </div>
+                </div>
+                <!--=========E nd resume tab content section===================================-->
+                <!--=========S tart portfolio tab content section===================================-->
+                <div id="portfolio" class="tab-pane fade">
+                  <div class="body-content">
+                    暂时没有留下任何信息~
+                    <%#= render 'layouts/resume/portfolio' %>
+                  </div>
+                </div>
+                <!--=========E nd portfolio tab content section===================================-->
+                <!--=========S tart Blog tab content section===================================-->
+                <div id="blog" class="tab-pane fade">
+                  <div class="body-content">
+                    暂时没有留下任何信息~
+                    <%#= render 'layouts/resume/blog' %>
+                  </div>
+                </div>
+                <!--=========E nd Blog tab content section===================================-->
+                <!--=========S tart Contact tab content section===================================-->
+                <div id="contact" class="tab-pane fade">
+                  <div class="body-content">
+                    暂时没有留下任何信息~
+                    <%#= render 'layouts/resume/contact' %>
+                  </div>
+                </div>
+              </div>
+              <!--=========E nd tab content section===================================-->
+              <a id="backtotop" href="#">
+                <i class="fa fa-arrow-up">
+                </i>
+              </a>
+              <div class="bg-line">
+              </div>
+            </section>
+            <!--=========E nd Content section===================================-->
+            <!--=========S tart Footer section===================================-->
+            <footer class="footer">
+              技术支持.<a href="http://www.zuyu114.com">足浴114</a>
+            </footer>
+            <!--=========E nd Footer section===================================-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--=========E nd Wrapper Page===================================-->
+    <!--=========T ext Showup Wait Document Ready===================================-->
+    <div id="wait-page" class="text-center" style="display: none;">
+      加载...
+    </div>
+    <!--=========L ink Config Custom styles===================================-->
+    <a href="/themes/vcard/modal_configuration.html" class="configuration ajax_link">
+      <i class="fa fa-cog"></i> 配置
+    </a>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true"></div>
+    <!--=========J avascript load===================================-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/themes/vcard/assets/jquery.js"></script>
+    <!-- jQuery animation page loader -->
+    <script src="/themes/vcard/assets/pace.min.js"></script>
+    <!-- JS maps for gmap3 JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files
+    as needed -->
+    <script src="/themes/vcard/assets/bootstrap.js"></script>
+    <script src="/themes/vcard/assets/jquery.autofix_anything.js"></script>
+    <script src="/themes/vcard/assets/jquery.mixitup.min.js"></script>
+
+    <script src="/themes/vcard/assets/jquery.magnific-popup.min.js"></script>
+    <!-- Configuration app js -->
+    <script src="/themes/vcard/assets/app.js"></script>
+  </body>
+
+</html>

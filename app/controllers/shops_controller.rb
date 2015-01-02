@@ -2,6 +2,8 @@ class ShopsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_shop, only: [:show, :m, :edit, :update, :destroy]
 
+  layout 'theme', only: [:m]
+  
   # GET /shops
   # GET /shops.json
   def index
@@ -16,7 +18,7 @@ class ShopsController < ApplicationController
 
   #mobile view
   def m
-
+    @user = @shop.user
   end
 
   # GET /shops/new
@@ -52,6 +54,7 @@ class ShopsController < ApplicationController
   # PATCH/PUT /shops/1
   # PATCH/PUT /shops/1.json
   def update
+     authorize!(@shop)
     respond_to do |format|
       if @shop.update(shop_params)
         format.html { redirect_to @shop, notice: '更新成功.' }
@@ -66,6 +69,7 @@ class ShopsController < ApplicationController
   # DELETE /shops/1
   # DELETE /shops/1.json
   def destroy
+    authorize!(@shop)
     @shop.destroy
     respond_to do |format|
       format.html { redirect_to shops_url }

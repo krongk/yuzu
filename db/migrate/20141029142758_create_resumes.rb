@@ -10,7 +10,6 @@ class CreateResumes < ActiveRecord::Migration
       t.string :education
       t.string :work_year
       t.text :content
-      t.string :phone
       t.string :qq
       t.references :region, index: true
       t.references :city, index: true

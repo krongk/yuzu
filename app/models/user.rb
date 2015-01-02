@@ -28,6 +28,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_active?
+    return true if self.is_processed == 'y' || self.shop.is_processed == 'y'
+    return false
+  end
+
+  #get this use has which product_cates, see ApplicationHelper::PRODUCT_CATES
+  # [0, 1, 3]
+  def active_cate_ids
+    self.products.group_by(&:cate_id).keys.sort
+  end
+
+  def recent_jobs(count = 10)
+    self.jobs.order("updated_at DESC").limit(count)
+  end
+
+  def recent_products(count = 10)
+    self.products.order("updated_at DESC").limit(count)
+  end
+
   # validates :mobile_phone,
   # :uniqueness => {
   #   :case_sensitive => false

@@ -2,7 +2,26 @@
   <div class="col-md-3 col-sm-12">
     <h1>发布<%= @cate_name %></h1>
     <div class="hidden-xs hidden-sm">
-      weew
+      <div class="list-group">
+        <a href="#" class="list-group-item active">
+          <h4 class="list-group-item-heading">发布<%= @cate_name %>说明</h4>
+          <p class="list-group-item-text">请确保您发布信息的真实性，我们有权审核虚假信息并给予删除处理。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">发布范围</h4>
+          <p class="list-group-item-text">足浴足疗行业相关服务/团购信息，产品促销，店铺求购转让，招商/培训信息。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">如何开通？</h4>
+          <p class="list-group-item-text">你只需要填写右侧的信息，即刻开通。唯一二维码链接会通过短信形式发送到你的手机号。</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">需要帮助？</h4>
+          <p class="list-group-item-text">
+            <%= render 'layouts/qq_links' %>
+          </p>
+        </a>
+      </div>
     </div>
   </div>
   <div class="col-md-6 col-md-offset2 col-sm-12">

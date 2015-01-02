@@ -41,6 +41,7 @@ class DistrictsController < ApplicationController
   # PATCH/PUT /districts/1
   # PATCH/PUT /districts/1.json
   def update
+    authorize!(@district)
     respond_to do |format|
       if @district.update(district_params)
         format.html { redirect_to @district, notice: 'District was successfully updated.' }
@@ -55,6 +56,7 @@ class DistrictsController < ApplicationController
   # DELETE /districts/1
   # DELETE /districts/1.json
   def destroy
+    authorize!(@district)
     @district.destroy
     respond_to do |format|
       format.html { redirect_to districts_url }

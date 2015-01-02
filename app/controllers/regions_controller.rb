@@ -40,6 +40,7 @@ class RegionsController < ApplicationController
   # PATCH/PUT /regions/1
   # PATCH/PUT /regions/1.json
   def update
+    authorize!(@region)
     respond_to do |format|
       if @region.update(region_params)
         format.html { redirect_to @region, notice: 'Region was successfully updated.' }
@@ -54,6 +55,7 @@ class RegionsController < ApplicationController
   # DELETE /regions/1
   # DELETE /regions/1.json
   def destroy
+    authorize!(@region)
     @region.destroy
     respond_to do |format|
       format.html { redirect_to regions_url }

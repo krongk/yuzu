@@ -41,6 +41,8 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1
   # PATCH/PUT /cities/1.json
   def update
+    authorize!(@city)
+
     respond_to do |format|
       if @city.update(city_params)
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
@@ -55,6 +57,7 @@ class CitiesController < ApplicationController
   # DELETE /cities/1
   # DELETE /cities/1.json
   def destroy
+    authorize!(@city)
     @city.destroy
     respond_to do |format|
       format.html { redirect_to cities_url }

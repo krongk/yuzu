@@ -5,8 +5,8 @@ RainCms::Application.routes.draw do
   resources :regions
   resources :notifications
   resources :pictures
+  
   resources :products
-
   resources :jobs
   
   resources :resumes do
@@ -24,7 +24,11 @@ RainCms::Application.routes.draw do
   resources :comments
   #routes for admin ==============================
   devise_for :users, :controllers => {:registrations => "registrations"}
-  resources :users
+  resources :users do 
+    resources :jobs
+    resources :products
+  end
+
   mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
     resources :pages

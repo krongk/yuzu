@@ -1,3 +1,4 @@
+
 class ShopsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_shop, only: [:show, :m, :edit, :update, :destroy]
@@ -7,7 +8,11 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.page(params[:page])
+    @shops = if params[:user_id] || user_signed_in?
+      Shop.where(user_id: params[:user_id] || current_user.id).page(params[:page])
+    else
+      Shop.all.page(params[:page])
+    end
   end
 
   # GET /shops/1
@@ -40,11 +45,14 @@ class ShopsController < ApplicationController
     @shop = Shop.new(shop_params)
     @shop.user_id = @user.id
 
-    respond_to do |format|
-      if @shop.save
-        format.html { redirect_to @shop, notice: '创建成功.' }
-        format.json { render action: 'show', status: :created, location: @shop }
+    if @shop.save
+      if user_signed_in?
+        redirect_to user_root_path, notice: '信息发布成功.'
       else
+        redirect_to new_user_session_path(id: @user.id), notice: '信息发布成功.'
+      end
+    else
+      respond_to do |format|
         format.html { render action: 'new' }
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end
@@ -85,6 +93,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:title, :typo, :user_id, :region_id, :city_id, :district_id, :detail_address, :content, :contact_name, :mobile_phone, :email, :website, :source, :source_url, :is_processed)
+      params.require(:shop).permit(:title, :typo, :user_id, :region_id, :city_id, :city_name, :district_id, :detail_address, :content, :contact_name, :mobile_phone, :email, :website, :source, :source_url, :is_processed)
     end
 end

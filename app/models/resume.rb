@@ -13,6 +13,8 @@ class Resume < ActiveRecord::Base
   #format
   validates :mobile_phone, format: { with: /\A1(3|5|6|7|8|9)[0-9]{9}\z/, message: "请输入正确的手机号码" }
 
+  before_save :check_data
+
   def sex_name
     self.sex.blank? ? '' : self.sex ? '男' : '女'
   end
@@ -25,4 +27,12 @@ class Resume < ActiveRecord::Base
       []
     end
   end
+
+  private
+  def check_data
+    if self.city_id.nil?
+      self.city_id = City.find_by(name: self.city_name).try(:id)
+    end
+  end
+
 end

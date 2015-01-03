@@ -1,23 +1,12 @@
-<h1>Listing shops</h1>
+<h1>微店信息</h1>
 
-<table>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>User</th>
-      <th>Region</th>
-      <th>City</th>
-      <th>District</th>
-      <th>Detail address</th>
-      <th>Content</th>
-      <th>Contact name</th>
-      <th>Contact phone</th>
-      <th>Website</th>
-      <th>Source</th>
-      <th>Source url</th>
-      <th>Is processed</th>
-      <th></th>
-      <th></th>
+      <th>标题</th>
+      <th>地址</th>
+      <th>联系人</th>
+      <th>链接</th>
       <th></th>
     </tr>
   </thead>
@@ -26,26 +15,20 @@
     <% @shops.each do |shop| %>
       <tr>
         <td><%= shop.title %></td>
-        <td><%= shop.user %></td>
-        <td><%= shop.region %></td>
-        <td><%= shop.city %></td>
-        <td><%= shop.district %></td>
-        <td><%= shop.detail_address %></td>
-        <td><%= shop.content %></td>
+        <td><%= show_region(shop) %> <%= shop.detail_address %></td>
         <td><%= shop.contact_name %></td>
-        <td><%= shop.contact_phone %></td>
         <td><%= shop.website %></td>
-        <td><%= shop.source %></td>
-        <td><%= shop.source_url %></td>
-        <td><%= shop.is_processed %></td>
-        <td><%= link_to 'Show', shop %></td>
-        <td><%= link_to 'Edit', edit_shop_path(shop) %></td>
-        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '详细', shop %> &nbsp;|&nbsp; <%= link_to '微网', m_shop_path(shop) %></td>
+        <% if shop.user_id == current_user.id %>
+          <td><%= link_to '编辑', edit_shop_path(shop) %></td>
+          <td><%= link_to '删除', shop, method: :delete, data: { confirm: '确定要删除?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<%= will_paginate @shops %>
 <br>
 
-<%= link_to 'New Shop', new_shop_path %>
+<%= link_to '我要创建', new_shop_path, class: 'btn btn-primary' %>

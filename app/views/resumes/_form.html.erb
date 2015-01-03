@@ -10,27 +10,28 @@
         hint: '请输入接收简历的邮箱地址',
         input_html: { value: current_user.try(:email) } %>
     <hr/>
-    <%= f.input :qq %>
-    <hr/>
+ 
     <%= f.input :cate_id, collection: ApplicationHelper::JOB_CATES, include_blank: false  %>
     
     <%= f.input :summary, :input_html => {:rows => 4},
-        placeholder: '简单说明一下你的优势和特长，可提高15%的查看率。' %>
+        placeholder: '简单说明一下你的优势和特长，求职意向城市等，可提高15%的查看率。' %>
     <%= f.collection_radio_buttons :sex, [[true, '男'] ,[false, '女']], :first, :last,
         collection_wrapper_tag: 'div',
         collection_wrapper_class: 'control-group',
         item_wrapper_tag: 'span', 
         item_wrapper_class: '' %>
     <%= f.input :age %>
+    <%= f.input :qq %>
     <%#= f.input :age, as: :date, start_year: Date.today.year - 50,
                     end_year: Date.today.year, order: [:year, :month, :day] %>
     <%= f.input :education, collection: ['高中以下', '高中', '中专/技校', '专科', '本科', '硕士', 'MBA/EMBA'], prompt: "选择最高学历" %>
     <%= f.input :work_year, collection: ['1年以下', '1-2年', '3-5年', '5-8年', '8年以上'], prompt: "选择工作年限" %>
     <%= f.input :content, :input_html => {:rows => 12} %>
-    <hr/>
+
     <%= f.association :region %>
-    <%= f.association :city %>
-    <%= f.association :district %>
+    <%= f.input :city_name %>
+    <%#= f.association :city %>
+    <%#= f.association :district %>
   </div>
   <hr/>
   <div class="form-actions">

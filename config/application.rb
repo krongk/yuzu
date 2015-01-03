@@ -9,6 +9,12 @@ Bundler.require(:default, Rails.env)
 module RainCms
   class Application < Rails::Application
 
+    # config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    # config.autoload_paths += %W(#{config.root}/app/models/template)
+    
+    #auto load extras
+    config.autoload_paths += %W(#{config.root}/extras)
+
     # don't generate RSpec tests for views and helpers
     config.generators do |g|
       g.view_specs false

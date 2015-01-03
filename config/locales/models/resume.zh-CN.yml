@@ -9,7 +9,7 @@ zh-CN:
         cate: 应聘职位
         cate_id: 应聘职位
         name: 姓名
-        summary: 自我介绍
+        summary: 自我介绍/求职意向
         sex: 性别
         age: 年龄
         education: 学历
@@ -22,6 +22,7 @@ zh-CN:
         is_full_time: 是否全职 
         region: 省
         city: 市
+        city_name: 所在城市
         district: 区
         detail_address: 详细地址 
         pv_count: 浏览量

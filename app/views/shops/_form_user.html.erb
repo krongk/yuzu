@@ -45,8 +45,9 @@
         <%= f.input :title, required: true, hint: "请输入微名片的标题" %>
         <%= f.input :content, :input_html => {:rows => 12} %>
         <%= f.association :region %>
-        <%= f.association :city %>
-        <%= f.association :district %>
+        <%= f.input :city_name %>
+        <%#= f.association :city %>
+        <%#= f.association :district %>
         <%= f.input :detail_address %>
         
         <%= f.input :contact_name %>

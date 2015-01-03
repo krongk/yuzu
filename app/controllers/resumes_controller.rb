@@ -35,7 +35,7 @@ class ResumesController < ApplicationController
 
     @resume = Resume.new(resume_params)
     @resume.user_id = @user.id
-
+    
     if @resume.save
         if user_signed_in?
           redirect_to user_root_path, notice: '信息发布成功.'
@@ -86,6 +86,6 @@ class ResumesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def resume_params
-      params.require(:resume).permit(:email, :cate_id, :name, :summary, :sex, :age, :education, :work_year, :content, :mobile_phone, :qq, :region_id, :city_id, :district_id, :pv_count, :fav_count, :is_processed)
+      params.require(:resume).permit(:email, :cate_id, :name, :summary, :sex, :age, :education, :work_year, :content, :mobile_phone, :qq, :region_id, :city_id, :city_name, :district_id, :pv_count, :fav_count, :is_processed)
     end
 end

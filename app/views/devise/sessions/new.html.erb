@@ -15,18 +15,32 @@
 
 <% else %>
 
-  <h2>会员登录</h2>
-  <div class="panel panel-primary">
-    <div class="panel-heading">
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <h2>会员登录</h2>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>      
+                <%= f.input :login, :autofocus => true, placeholder: '请输入电子邮箱或手机号码' %>
+                <%= f.input :password, hint: false %>
+                <%#= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+                <br/>
+                <%= f.button :submit, "登 录", :class => 'btn-primary' %>
+            <% end %>
+            <%= render "devise/shared/links" %>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-        <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>      
-            <%= f.input :login, :autofocus => true %>
-            <%= f.input :password, hint: false %>
-            <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-            <%= f.button :submit, "登 录", :class => 'btn-primary' %>
-        <% end %>
-        <%= render "devise/shared/links" %>
+    <div class="col-md-6 col-sm-12">
+      <h3>使用帮助</h3>
+      <hr/>
+      <ul>
+        <li>当你第一次在足浴114发布信息时，系统默认生成了你的账号（手机号和电子邮箱）</li>
+        <li>系统会发送一条默认密码的短信到你注册的手机号</li>
+        <li>如果没有在足浴114发布任何信息，也没有账号，请<a href="/users/sign_up">点击这里注册账号</a>.</li>
+      </ul>
     </div>
   </div>
 

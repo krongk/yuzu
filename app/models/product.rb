@@ -11,6 +11,8 @@ class Product < ActiveRecord::Base
 
   validates :cate_id, :title, presence: true
 
+  before_save :check_data
+
   #搜索
   def self.search(search)
     if search
@@ -19,5 +21,12 @@ class Product < ActiveRecord::Base
       []
     end
   end
+  
+  private
+    def check_data
+      if self.city_id.nil?
+        self.city_id = City.find_by(name: self.city_name).try(:id)
+      end
+    end
   
 end

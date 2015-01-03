@@ -14,6 +14,7 @@
 
     <ul class="nav nav-pills nav-stacked" role="tablist">
       <li role="presentation" class="active"><a href="#">后台管理</a></li>
+      <li role="presentation"><%= link_to '我的微名片/微店', shops_path(user_id: current_user.id) %></li>
       <li role="presentation"><%= link_to '我的求职简历', resumes_path(user_id: current_user.id) %></li>
       <% ApplicationHelper::PRODUCT_CATES.each_with_index do |cate, index| %>
         <li role="presentation"><%= link_to "我的#{cate}", cate_products_path(cate_id: index, user_id: current_user.id) %></li>

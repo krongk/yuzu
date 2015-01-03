@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
         password_confirmation: pwd,
         typo: typo
       )
-      SmsSendWorker.perform_async(mobile_phone, "【足浴114】尊敬的客户，足浴114初始化你的账号密码为：#{pwd}, 请妥善保管或登录后台修改密码: http://www.zuyu114.com")
+      SmsSendWorker.perform_async(mobile_phone, "【足浴114】尊敬的客户，您的账号初始密码为：#{pwd}, 请使用本手机号登录后台修改: http://zuyu114.com")
     end
     user
   end

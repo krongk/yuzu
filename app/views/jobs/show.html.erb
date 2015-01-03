@@ -26,10 +26,9 @@
         <div class="entry-content indented">
             <p class="lead">
                 <strong>薪资待遇:</strong><%= @job.salary %><br/>
-                <strong>联系人:</strong><%= @shop.contact_name %><br/>
-                <strong>联系地址:</strong><%= show_region(@shop) %><%= @shop.detail_address %><br/>
-                <strong>联系电话:</strong><%= show_mobile_phone @shop.mobile_phone %><br/>
-                <strong>电子邮件:</strong><%= show_email @shop.email %><br/>
+                <strong>联系地址:</strong><%= show_region(@job) %><%= @job.detail_address %><br/>
+                <strong>联系电话:</strong><a href="tel:<%= @job.user.mobile_phone %>"><%= show_mobile_phone @job.user.mobile_phone %></a><br/>
+                <strong>电子邮件:</strong><%= show_email @job.user.email %><br/>
             </p>
         </div>
     </article>
@@ -37,7 +36,9 @@
   </div><!--/.col-md-8.col-lg-8.col-xl-9-->
 
   <div class="sidebar col-md-6 col-lg-4 col-xl-3">
-    <%= render partial: 'layouts/sidebar_shop', locals: { shop: @shop } %>
+    <% if @job.user.shop %>
+      <%= render partial: 'layouts/sidebar_shop', locals: { shop: @job.user.shop } %>
+    <% end %>
   </div><!--/.sidebar col-md-4 col-lg-4 col-xl-3-->
 
 </div><!--/#content-->

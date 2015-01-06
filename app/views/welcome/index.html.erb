@@ -1,71 +1,61 @@
-<div class="section row entries bg-primary section-no-margin-bottom">
+<div class="section section-no-margin-bottom row entries" >
 
-  <article class="entry style-grid style-hero hero-sm-largest type-post col-sm-12 col-md-6 colheight-sm-1 colheight-md-2 colheight-lg-2 colheight-xl-2">
+  <article class="entry style-grid style-hero hero-nav type-post col-lg-6 col-xs-12 col-sm-12" style="height: 220px;">
     
-    <div class="ribbon ribbon-pulled ribbon-small ribbon-highlight">
-      <a href="blog.html">足浴114</a>
-    </div>
-
     <header class="entry-header">
-      <h3 class="entry-title">足浴114上线公告 </h3>
-      <div class="entry-meta">
-        <span class="entry-date"><a href="blog.html"><time datetime="2013-07-04T23:26:34+00:00"><%= get_date(Admin::Channel.last.updated_at)%></time></a></span>
-      </div>
+      <p class="small"></p>
+      <h1 class="text-center">我是足疗技师</h1>
+      <br/>
     </header>
+
+    <div class="text-center">
+      <a href="/resumes/new" class="btn btn-lg btn-success">制作微简历</a> &nbsp;&nbsp;<a href="/jobs" class="btn btn-lg btn-success">找工作</a>
+    </div>
 
     <figure class="entry-thumbnail">
 
-      <a href="single.html" class="overlay overlay-primary"></a>
+      <div class="overlay overlay-primary"></div>
 
       <!-- to disable lazy loading, remove data-src and data-src-retina -->
-      <img src="/assets/shop/1.jpg" data-src="/assets/shop/1.jpg" data-src-retina="/assets/shop/1.jpg" width="680" height="452" alt="" style="opacity: 1;">
+      <img src="/assets/b1.jpg" data-src="/assets/b1.jpg" data-src-retina="/assets/720x420_1.jpg" width="480" height="280" alt="" style="opacity: 1;">
 
       <!--fallback for no javascript browsers-->
       <noscript>
-        &lt;img src="/assets/680x452_2.jpg" alt=""&gt;
+        &lt;img src="/assets/b1.jpg" alt=""&gt;
       </noscript>
 
     </figure>
-
   </article>
-  <% index = 0 %>
-  <% @channels.each do |channel| %>
-    <% post = channel.pages.last %>
-    <% next if post.nil? %>
-    <% index += 1 %>
-    <% next if index > 4 %>
-    <article class="entry style-grid style-hero type-post col-md-6 col-lg-3 colheight-sm-1">
-      
-      <div class="ribbon ribbon-pulled ribbon-small ribbon-highlight">
-        <%= link_to channel.title, channel_path(channel) %>
-      </div>
 
-      <header class="entry-header">
-        <h3 class="entry-title">
-          <%= link_to post.title, post_path(post) %>
-          <small><%= link_to post.description, post_path(post) %></small>
-        </h3>
-        <div class="entry-meta">
-          <span class="entry-date"><a href="blog.html"><time datetime="2013-07-04T23:26:34+00:00"><%= distance_of_time_in_words_to_now(post.updated_at) %>前</time></a></span>
-        </div>
-      </header>
-      
-      <figure class="entry-thumbnail">
+  <article class="entry style-grid style-hero hero-nav type-post col-lg-6 col-xs-12 col-sm-12" style="height: 220px;">
+    
+    <header class="entry-header">
+      <p class="small"></p>
+      <h1 class="text-center">我是足疗商家</h1>
+      <br/>
+    </header>
 
-        <%= link_to '', post_path(post), class: 'overlay overlay-primary'%>
-        <!-- to disable lazy loading, remove data-src and data-src-retina -->
-        <img src="<%= post.image_path %>" data-src="<%= post.image_path %>" data-src-retina="<%= post.image_path %>" width="480" height="280" alt="" style="opacity: 0.6;">
+    <div class="text-center">
+      <a href="/dashboard/post" class="btn btn-lg btn-success">信息发布</a>&nbsp;&nbsp; <a href="/shops/new?type=shop" class="btn btn-lg btn-success">开通微店</a>
+    </div>
 
-        <!--fallback for no javascript browsers-->
-        <noscript>
-          &lt;img src="<%= post.image_path %>" alt=""&gt;
-        </noscript>
+    <figure class="entry-thumbnail">
 
-      </figure>
+      <div class="overlay overlay-primary"></div>
 
-    </article>
-  <% end %>
+      <!-- to disable lazy loading, remove data-src and data-src-retina -->
+      <img src="/assets/b3.jpg" data-src="/assets/b3.jpg" data-src-retina="/assets/720x420_1.jpg" width="480" height="280" alt="" style="opacity: 1;">
+
+      <!--fallback for no javascript browsers-->
+      <noscript>
+        &lt;img src="/assets/480x280_1.jpg" alt=""&gt;
+      </noscript>
+
+    </figure>
+  </article>
+
 </div>
+
 
 <div class="section content bg-base">
   

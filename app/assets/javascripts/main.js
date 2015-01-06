@@ -127,7 +127,7 @@ if (!(window.console && console.log)) {
 
 		$(window).trigger('scroll');
 
-		// $('.carousel').carousel();
+		//$('.carousel').carousel();
 		
 		$('a[data-rel^="prettyPhoto"]').each(function () {
 
